@@ -1,0 +1,29 @@
+\begin{tikzpicture}[tdplot_main_coords]
+    % Define the spacing and the number of elements
+    \def\spacing{1.2}
+    \def\DOA{65}
+    \def\numElements{5}
+    \coordinate (O) at (0,0,0);
+
+    % Draw the coordinate axes
+    \draw[thick,->,textcolor] (0,0,0) -- (3,0,0) node[anchor=north east]{$x$};
+    \draw[thick,->,textcolor] (0,0,0) -- (0,3,0) node[anchor=north west]{$y$};
+    \draw[thick,->,textcolor] (0,0,0) -- (0,0,3) node[anchor=south]{$z$};
+
+    \draw[thick,dotted,textcolor] (O) -- ({2.5*cos(\DOA)},{2.5*sin(\DOA)},0);
+    \tdplotdrawarc[->,textcolor]{(O)}{2.5}{0}{\DOA}{anchor=north}{$\psi$}
+
+    % Draw the elements in the xy-plane
+    \foreach \i in {0,...,\the\numexpr\numElements-1\relax} {
+      \draw (\numElements*\spacing/2-\i*\spacing-\spacing/2,0) node[circle,fill,inner sep=2pt,textcolor] (node\i) {};
+      \ifnum\i=0
+          \node[above, xshift=-3, yshift=1,textcolor] at (node\i) {$0$};
+      \fi
+      \ifnum\i=1
+          \node[above, xshift=-3, yshift=1,textcolor] at (node\i) {$1$};
+      \fi
+      \ifnum\i=\the\numexpr\numElements-1\relax
+          \node[above, xshift=-3, yshift=1,textcolor] at (node\i) {$M-1$};
+      \fi
+      }
+  \end{tikzpicture}

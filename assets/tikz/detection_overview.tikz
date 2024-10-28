@@ -1,0 +1,53 @@
+\begin{tikzpicture}[typetag/.style={rectangle, draw, rounded corners,fill=black!70, fill opacity=1, text opacity=1,text width=1.4cm, align=center,minimum width=1cm, minimum height=0.5cm},
+    cascaded/.style={double copy shadow={shadow xshift=1ex,shadow yshift=-1ex}},
+    sum/.style={draw, circle, fill=black!70, inner sep=5pt},color=white]
+        % Nodes
+        \node [](input1) {$y_1(t)$};
+        \node [right=of input1,sum,xshift=-0.4cm,yshift=-0.795cm] (sum) {$\Sigma$};
+        \node [right=of sum,typetag,xshift=-0.4cm] (kurtosis) {Kurtosis};
+        
+        
+        \node (input2)[below=of input1,] {$y_M(t)$};
+        
+        \node [right=of kurtosis,typetag,xshift=-0.4cm,fill=green!40!black] (event) {Event};
+
+        \node [right=of event,xshift=-0.6cm] (output) {$\hat{z}_{1:M}^n(t)$};
+        
+        % Arrows
+        \draw[->] (input1) -- (sum);
+        \draw[->] (sum) -- (kurtosis);
+        \draw[->] (kurtosis) -- (event);
+        \draw[->] (input2) -- (sum);
+        \draw[->] (event) -- (output);
+
+        \path [] (input1) -- node[auto=false]{\vdots} (input2);
+        
+        \end{tikzpicture}  
+
+\begin{tikzpicture}[typetag/.style={rectangle, draw, rounded corners,fill=black!70, fill opacity=1, text opacity=1,text width=1.4cm, align=center,minimum width=1cm, minimum height=0.5cm},
+    cascaded/.style={double copy shadow={shadow xshift=1ex,shadow yshift=-1ex}},color=white]
+        % Nodes
+        \node (input1) {$\hat{z}^n_1(t)$};
+        \node [right=of input1,typetag,xshift=-0.4cm,text width=1.8cm] (preproc1) {Pre-processing};
+        \node [right=of preproc1,typetag,cascaded,xshift=-0.4cm] (signal1) {Signal features};
+        
+        
+        \node (input2)[below=of input1,yshift=-0.3cm] {$\hat{z}^n_M(t)$};
+        \node [right=of input2,typetag,xshift=-0.4cm,text width=1.8cm] (preproc2) {Pre-processing};
+        \node [right=of preproc2,typetag,cascaded,xshift=-0.4cm] (signal2) {Signal features};
+        
+        \node [right=of signal1,typetag,yshift=-0.97cm,xshift=-0.2cm,fill=green!40!black] (detection) {Detection};
+        \node [below=of signal2,yshift=0.8cm] (dummy) {};
+        
+        % Arrows
+        \draw[->] (input1) -- (preproc1);
+        \draw[->] (preproc1) -- (signal1);
+        \draw[->] (signal1) -- (detection);
+        \draw[->] (input2) -- (preproc2);
+        \draw[->] (preproc2) -- (signal2);
+        \draw[->] (signal2) -- (detection);
+        \path (input1) -- node[auto=false]{\vdots} (input2);
+        
+        \node [right=of preproc1,typetag,cascaded,xshift=-0.4cm] (signal1) {Signal features};
+        
+        \end{tikzpicture}

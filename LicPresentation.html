@@ -1,0 +1,1995 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Direction of Arrival Estimation for Wildlife Protection</title>
+
+		<meta name="description" content="A presentation of the Licentiate thesis Direction of Arrival Estimation for Wildlife Protection">
+		<meta name="author" content="Gustav Zetterqvist">
+
+		<!-- <meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/myStyle.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<!-- Title-Footer plugin -->
+		<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+
+		<!-- Load content plugin -->
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/loadcontent/plugin.js"></script>
+		<!-- Animate plugin https://github.com/rajgoel/reveal.js-plugins/tree/master/animate, https://svgjs.dev/docs/3.0/manipulating/#transforming -->
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/animate/plugin.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.2/svg.min.js"></script>
+
+		
+	</head>
+
+	<body>
+		
+
+		<div class="reveal">
+			
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-state="no-footer">
+					<div>
+						<h2 style="position: relative; top: 160px;">Direction of Arrival Estimation <br> for Wildlife Protection</h2>
+				
+						<small style="position: relative; top: 320px; left: -40px;font-size:x-large;opacity: 90%;text-align: left;">
+							<strong>Supervisor:</strong> Fredrik Gustafsson <br>
+							<strong>Co-supervisor:</strong> Gustaf Hendeby <br>
+						</small>
+						<small style="position: relative; top: 200px;font-size:xx-large;">
+							<strong>Gustav Zetterqvist</strong>
+							<p style="margin-top: 5px;">
+								Licentiate Seminar <br> 2024-10-18</p> 
+						</small>
+
+						<small style="position: relative; top: 320px;left: 70px;font-size:x-large;opacity: 90%;text-align: left;">
+							<strong>Opponent:</strong> Andreas Jakobsson (LU) <br>
+							<strong>Examiner:</strong> Svante Gunnarsson <br>
+						</small>
+					
+						<!-- <small style="position: absolute; top: 14px; right: 45px;">Paper ID: 64</small> -->
+
+						<img src="assets/logos/elliit-logotyp-vit-gul.png" style="opacity: 90%; height: 100px; margin: 10px auto 4rem auto; background: transparent; position: absolute; top: 14px; right: 40px" class="demo-logo">
+				
+						<img src="assets/logos/LiU_primary_white.png" style="opacity: 90%;height: 150px; margin: 10px auto 4rem auto; background: transparent; position: absolute; left:30px; bottom: -450px;" class="demo-logo">
+				
+						<img src="assets/logos/WASP_logo_white.png" style="opacity: 90%;height: 150px; margin: 10px auto 4rem auto; background: transparent; position: absolute; right: 0px; bottom: -470px;" class="demo-logo">
+					</div>
+				</section>
+				
+
+				<section>
+					
+					<section data-auto-animate data-auto-animate-unmatched>
+						<h2>Background</h2>
+						<p>
+							<ul>
+								<li class="fragment semi-fade-out" data-fragment-index="1">We are entering the sixth mass extinction. </li>
+								<li class="fragment fade-in-then-semi-out" data-fragment-index="1"> Caused by human population growth and <br> increased consumption. </li>
+								<li class="fragment fade-in-then-semi-out">Elephant population has decreased by	98% <br >since the 1500s. </li>
+								<li class="fragment fade-in-then-semi-out"> Decreasing rate between 2010-2014 was 8%. </li>
+							</ul>
+						</p>
+
+						<aside class="notes">
+							Dystopic intro, more and more species are going extinct, and the rate is only increasing. 
+							Last mass extinction was 66 million years ago, a meteorite and wiped out the dinosaurs.
+							<br> 
+							Meaning every 9 years half of the elephant population will die.
+						</aside>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched>
+						<h2>Background</h2>
+						<p>
+							<img src="assets/NyMo2.png"  alt="Nyhetsmorgon" style="height: 600px;clip-path: inset(35px 0px 35px 0px);margin-top: -40px;">
+							<p style="margin-top: -70px;">Nyhetsmorgon 10th of October</p>
+						</p>
+
+						<aside class="notes">
+							We have lost 73% of all wild vertebrate animals since 1970.
+							<br> ~55 years ago.
+						</aside>
+					</section>
+					
+					<section data-auto-animate="fade">
+						<div style="width: 1000px;margin: 0 auto;text-align: center">
+							<h2>Example 1 - Elephant tracking</h2>
+								<ul>
+									<li> Human-elephant conflict endangers people, property, and crops globally.
+									</li>
+									<li style="opacity: 0;">
+										A geophone-based system detects seismic waves from elephant footsteps to estimate direction.
+									</li>
+									<li style="opacity: 0;">
+										Real-time tracking helps warn residents and guide elephants back to their habitats.
+									</li>
+								</ul>
+						</div>
+					</section>
+
+					<section data-background-video="assets/Elephant_Berserk_India_full.mp4" data-background-video-muted data-state="no-footer" data-hide-controls="true">
+					</section>
+
+					<section data-auto-animate="fade">
+						<div style="width: 1000px;margin: 0 auto;text-align: center">
+							<h2>Example 1 - Elephant tracking</h2>
+								<ul>
+									<li style="opacity: 0.5;"> Human-elephant conflict endangers people, property, and crops globally.
+									</li>
+									<li class="fragment semi-fade-out" data-fragment-index="1">
+										A geophone-based system detects seismic waves from elephant footsteps to estimate direction.
+									</li>
+									<li class="fragment fade-in-then-semi-out" data-fragment-index="1">
+										Real-time tracking helps warn residents and guide elephants back to their habitats.
+									</li>
+								</ul>
+						</div>
+					</section>
+
+					<section data-auto-animate="fade">
+						<div style="width: 1000px;margin: 0 auto;text-align: center">
+							<h2>Example 1 - Elephant tracking</h2>
+							<img src="assets/Elephant_intro_low_new.png" alt="Elephant_signal" style="height: 700px;clip-path: inset(200px 100px 20px 20px);margin-top: -200px; margin-left: 80px;">
+						</div>
+					</section>
+
+					<section data-auto-animate="fade">
+						<h2>Example 2 - Acoustic Surveillance for Savanna Protection</h2>
+						<div style="width: 1000px;margin: 0 auto;text-align: center">
+							<ul>
+								<li class="fragment semi-fade-out" data-fragment-index="1">Wildlife protection requires localizing poachers and analyzing sound events on the savanna.</li>
+								<li class="fragment fade-in-then-semi-out" data-fragment-index="1">Microphone arrays estimate the direction of rifle shots to locate poachers.</li>
+								<li class="fragment fade-in-then-semi-out">Key sounds monitored: elephant trumpets, a woman's scream, and police sirens.</li>
+								<li class="fragment fade-in-then-semi-out">The system offers a complete overview, enhancing response and conservation efforts.</li>
+							</ul>
+						</div>
+					</section>
+				</section>
+
+				
+				<section data-auto-animate data-auto-animate-unmatched="true">
+					<h2>Outline</h2>
+					<ol>
+						<li>Problem Formulation</li>
+						<li class="fragment fade-left">Classical Direction of Arrival</li>
+						<li class="fragment fade-left">Elephant DOA</li>
+						<li class="fragment fade-left">Directional Sensitivity DOA</li>
+						<li class="fragment fade-left">Conclusions & Future Work</li>
+					</ol>
+					<!-- notes -->
+					<aside class="notes">
+						~ 5 min
+					</aside>
+				</section>
+
+				<!-- <section data-auto-animate data-auto-animate-unmatched="true">
+					<h2>Outline</h2>
+					<ol>
+						<li>Problem Formulation</li>
+						<li>Classical Direction of Arrival</li>
+						<li>Elephant DOA</li>
+						<ul>
+							<li>Experimental Setup</li>
+							<li>Signal Model</li>
+							<li>Signal Characteristics</li>
+							<li>Elephant Footstep Detection</li>
+							<li>Direction of Arrival Estimation</li>
+							<li>Results</li>
+							<li>Summary</li>
+						</ul>
+						<li>Directional Sensitivity DOA</li>
+						<ul>
+							<li>Experimental Setup</li>
+							<li>Signal Model</li>
+							<li>Method</li>
+							<ul>
+								<li>Training</li>
+								<li>FS Model</li>
+								<li>Estimation</li>
+								<li>Frequency Dependency</li>
+							</ul>
+							<li>Wideband Noise Model</li>
+							<li>Frequency Dependent Model</li>
+							<li>Summary</li>
+						</ul>
+						<li>Conclusions & Future Work</li>
+					</ol>
+				</section> -->
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Problem Statement</h2>
+						<div style="margin-right: 160px;margin-left: 160px;">
+							<ul >
+								<li class="fragment semi-fade-out" data-fragment-index="1">How can a conventional DOA estimator be used to estimate  the <b style="color: rgb(149, 230, 255);">DOA of elephant footsteps?</b> And how can we <b style="color: rgb(149, 230, 255);">differentiate</b> between an elephant footstep	and other seismic signals?</li>
+								<li class="fragment fade-left" data-fragment-index="1">How can the <b style="color: rgb(149, 230, 255);">directional sensitivity</b> of the sensors be utilized to estimate the DOA, and how should the directional sensitivity be <b style="color: rgb(149, 230, 255);">modeled</b>?</li>
+							</ul>
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Problem Statement</h2> 
+						<div style="margin-right: 160px;margin-left: 160px;">
+							<ul>
+								<li class="fragment semi-fade-out" data-fragment-index="1">What are the <b style="color: rgb(149, 230, 255);">theoretical limits</b> of the directional sensitivity based DOA estimator, and how does the <b style="color: rgb(149, 230, 255);">frequency content</b> of the signal affect the directional sensitivity?</li>
+								<li class="fragment fade-left" data-fragment-index="1">How does the directional sensitivity based DOA estimate <b style="color: rgb(149, 230, 255);">compare to state-of-the-art</b> methods using narrowband and realistic signals?</li>
+							</ul>
+						</div>
+					</section>
+				</section>
+
+				<section>
+					<!-- <section>
+						<h2>Classical DOA Estimation</h2>
+						<img src="assets/tikz/tikz_to_pdf_5.svg" alt="Elephant_signal" style="height: 450px;">
+
+					</section> -->
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Classical DOA Estimation</h2>
+						<span class="fragment appear-disappear"></span>
+						<span class="fragment appear-disappear"></span>
+						<span class="fragment appear-disappear"></span>
+						<span class="fragment appear-disappear"></span>
+						<span class="fragment appear-disappear"></span>
+						<span class="fragment appear-disappear"></span> 
+						
+						<div data-id="animate_sig" data-animate data-load="assets/tikz/tikz_to_pdf_5.svg">
+							<!--
+							{
+							"setup": [
+							{
+							"element": "#doa_arrow, #doa_arc,#psi, #x-arrow, #x-line, #y-arrow, #y-line,#v_psi,#x,#y,#tau_1,#tau_2,#dashed_sensor1,#dashed_sensor2,#dotted_path,#tau_1_curl,#tau_2_curl,#arrow, #wave-1,#wave-2,#wave-3",
+							"modifier": "opacity",
+							"parameters": [0]
+							},
+							{
+							"element": "#arrow-line",
+							"modifier": "stroke",
+							"parameters": [40.6] 
+							}
+							],
+							"animation":[
+							[
+							{
+							"element": "#wave-1",
+							"modifier": "opacity",
+							"parameters": [1],
+							"delay": 100
+							},
+							{
+							"element": "#wave-2",
+							"modifier": "opacity",
+							"parameters": [1],
+							"delay": 100
+							},
+							{
+							"element": "#wave-3",
+							"modifier": "opacity",
+							"parameters": [1],
+							"delay": 100							
+							},
+							{
+							"element": "#arrow-line",
+							"modifier": "attr",
+							"duration": 4000,
+							"parameters": [ {"stroke-dashoffset":"0"} ],
+							"delay": 200
+							},
+							{
+							"element": "#arrow",
+							"modifier": "opacity",
+							"parameters": [1],
+							"delay": -1800
+							}
+							],[
+							{
+							"element": "#dotted_path",
+							"modifier": "opacity",
+							"parameters": [1]
+							}
+							],[ 
+							{
+							"element": "#x,#x-line,#x-arrow,#y,#y-line,#y-arrow",
+							"modifier": "opacity",
+							"parameters": [1]
+							}
+							],[ 
+							{
+							"element": "#dashed_sensor1,#dashed_sensor2",
+							"modifier": "opacity",
+							"parameters": [1]
+							}
+							],[ 
+							{
+							"element": "#tau_1,#tau_1_curl",
+							"modifier": "opacity",
+							"parameters": [1]
+							},
+							{
+							"element": "#tau_2,#tau_2_curl",
+							"modifier": "opacity",
+							"parameters": [1]
+							}
+							],[
+							{
+							"element": "#doa_arc,#doa_arrow",
+							"modifier": "opacity",
+							"parameters": [1]
+							},							 
+							{
+							"element": "#psi",
+							"modifier": "opacity",
+							"parameters": [1]
+							}
+							],[ 
+							{
+							"element": "#v_psi",
+							"modifier": "opacity",
+							"parameters": [1]
+							}					
+							]]
+							}
+							-->
+							<aside class="notes">
+								~ 7-9 min
+							</aside>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Classical DOA Estimation</h2>
+						<div>
+							<div data-id="animate_1">\[ y_m(t) = s(t - \tau_m(\psi)) + e_m(t) \]</div>
+							<div data-id="animate_2" class="fragment" data-fragment-index="1">\[ \tau_m = \frac{\pmb{p}_m^T \pmb{v}(\psi)}{c}  \]</div>
+							<div data-id="animate_3" class="fragment" data-fragment-index="1">
+									$\pmb{p}_m$: position of sensors <br> 
+									$\pmb{v}(\psi)$: direction vector <br>
+									$c$: speed of signal <br> 
+									$\psi$: DOA</div>
+						</div>
+						<aside class="notes">
+							~ 10 min
+						</aside>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Classical DOA Estimation</h2>
+						<div>
+							
+							<div data-id="animate_1">
+								\[ y_m(t) = s(t - \tau_m(\psi)) + e_m(t) \]
+							</div>
+							<div>
+								\[\xrightarrow{\mathcal{F}} Y_m(f) = S(f) e^{-j2\pi f \tau_m(\psi)} + E_m(f) \]
+							</div>
+							<div data-id="animate_2">\[ \tau_m = \frac{\pmb{p}_m^T \pmb{v}(\psi)}{c}  \]</div>
+							<div data-id="animate_3">
+									$\pmb{p}_m$: position of sensors <br> 
+									$\pmb{v}(\psi)$: direction vector <br>
+									$c$: speed of signal <br> 
+									$\psi$: DOA</div>
+						</div>
+					</section>
+
+					<section>
+						<h2>Array Structures</h2>
+						<img src="assets/tikz/tikz_to_pdf_6.svg" alt="ULA" style="height: 400px;margin-right: 100px;">
+						<img class="fragment" src="assets/tikz/tikz_to_pdf_7.svg" alt="UCA" style="height: 400px;">
+						
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Estimation Metods</h2>
+						<ul>
+							<li class="fragment custom grows">Delay-and-Sum Beamformer</li>
+							<li>MUSIC</li>
+							<li>Bartlett</li>
+							<li>MVDR (Capon)</li>
+							<li>MCCC</li>
+						</ul>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<div>
+							<h2>Delay-and-Sum Beamformer</h2>
+							<p data-id="animate_2" style="margin-top: 180px;margin-bottom: 180px;">
+								\[ \mbox{Signal model}:  y_m[l] = s\left[l - \delta_m\left(\psi\right)\right] + e_m[l] \] 
+							</p>
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<div>
+							<h2>Delay-and-Sum Beamformer</h2>
+							<p data-id="animate_2" style="opacity: 0.5;margin-top: 40px;">
+								\[ \mbox{Signal model}:  y_m[l] = s\left[l - \delta_m\left(\psi\right)\right] + e_m[l] \] 
+							</p>
+							
+							<p data-id="animate_3">
+								Delay-and-Sum Beamformer:
+								\[ \hat{\psi} = \arg\max_{\psi} \sum_{l=1}^N \Bigg| \frac{1}{M} \sum_{m=1}^{M} y_m[l+\delta_m(\psi)]\Bigg|^2 \]
+							</p>
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<div>
+							<h2>Delay-and-Sum Beamformer</h2>
+							<p data-id="animate_2" style="opacity: 0.5; margin-top: 40px" >
+								\[ \mbox{Signal model}:  y_m[l] = s\left[l - \delta_m\left(\psi\right)\right] + e_m[l] \] 
+							</p>
+							
+							<p data-id="animate_3" style="margin-bottom: -180px;" >
+								Delay-and-Sum Beamformer:
+								\[ \hat{\psi} = \arg\max_{\psi} \sum_{l=1}^N \Bigg| \underbrace{\frac{1}{M} \sum_{m=1}^{M} y_m[l+\delta_m(\psi)]}_{y_{DS}[l,\psi]} \Bigg|^2 \]
+							</p>
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true" data-visibility="hidden">
+						<h2>Delay-and-Sum Beamformer</h2>
+						<img src="assets/tikz/tikz_to_pdf_27.svg" alt="Delay-and-Sum" style="height: 500px;margin-top: -20px;margin-bottom: 0px;">
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<div>
+							<h2>Direction of Arrival Estimation</h2>
+													
+							<div class="r-stack">
+								<p style="width: 70%;" class="fragment fade-out" data-fragment-index="1">
+									<img src="assets/DelayAndSumVisualize_lic_1.svg" alt="DelayAndSumVisualize_1">
+
+								</p>
+								<p style="width: 70%;" class="fragment fade-in" data-fragment-index="1">
+									<img src="assets/DelayAndSumVisualize_lic_2.svg" alt="DelayAndSumVisualize_2">
+								</p>
+								<p class="fragment fade-in" data-fragment-index="2" style="width: 70%;">
+									<video data-autoplay loop src="assets/DelayAndSumVisualizeDark_Lic.mp4"></video>
+								</p>
+							</div>
+						</div>
+					</section>
+					<section data-visibility="hidden">
+						<h2>Method Comparision</h2>
+						<img src="assets/tikz/tikz_to_pdf_8.svg" alt="Sinusoids" style="width: 1350px;">
+						<img class="fragment" src="assets/tikz/tikz_to_pdf_9.svg" alt="Multi-Sin" style="width: 1350px;">
+					</section>
+				</section>
+				<!-- <section> -->
+					<!-- <section>
+						<h2>Application - Elephant DOA</h2>
+					</section> -->
+					<section data-background-transition="slide" data-background="assets/Elephant_intro_background.svg" data-state="no-footer"> 
+						<!-- 35px; left: 680px -->
+						<img src="assets/Elephant_intro_wave_1.svg" class="fragment fade-in-then-semi-out" style="position: relative; top: 130px; left: 580px;">
+						<img src="assets/Elephant_intro_wave_2.svg" class="fragment fade-in-then-semi-out" style="position: relative; top: 152px; left: 440px;">
+						<img src="assets/Elephant_intro_wave_3.svg" class="fragment fade-in-then-semi-out" style="position: relative; top: 173px; left: 245px;">
+						<img src="assets/Elephant_intro_arrow.svg" class="fragment fade-in-then-semi-out" style="position: relative; top: 334px; right: 550px; width: 35%;height: 35%;">
+						<h2 data-fragment-index="0" class="highlights" style="position: relative;top: -250px;left: 240px;">Application - Elephant DOA</h2>
+						<small class="highlights_ref fragment fade-out" data-fragment-index="0" style="position: relative;top:120px;left: 20px;width: 50%;"> [1] Zetterqvist, et al. <em>Elephant DOA Estimation using a Geophone Network</em>. In FUSION 2023.</small>
+
+						<aside class="notes">
+							~ 12-14 min
+						</aside>
+					</section>
+				<!-- </section> -->
+				
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Signal Model</h2>
+						<span class="fragment appear-disappear"></span>
+						<span class="fragment appear-disappear"></span>
+						
+						<div data-id="animate_sig" data-animate data-load="assets/Signal_model_ani_lic.svg">
+							<!--
+							{
+							"setup": [
+							{
+							"element": "#hide > #rect1",
+							"modifier": "opacity",
+							"parameters": [1]
+							},
+							{
+							"element": "#hide > #rect1",
+							"modifier": "fill",
+							"parameters": ["#191919"]
+							},
+							{
+							"element": "#y-text",
+							"modifier": "opacity",
+							"parameters": [0]
+							},
+							{
+							"element": "#z1-text",
+							"modifier": "opacity",
+							"parameters": [0]
+							},
+							{
+							"element": "#z2-text",
+							"modifier": "opacity",
+							"parameters": [0]
+							},
+							{
+							"element": "#y-sig > #z1",
+							"modifier": "stroke",
+							"parameters": ["#ffffff"]
+							}
+							,
+							{
+							"element": "#y-sig > #z2",
+							"modifier": "stroke",
+							"parameters": ["#ffffff"]
+							}
+							],
+							"animation":[
+							[
+							{
+							"element": "#y-text",
+							"modifier": "opacity",
+							"parameters": [1],
+							"delay": 8000
+							},
+							 {
+							"element": "#hide > #rect1",
+							"modifier": "attr",
+							"duration": 8000,
+							"delay": 400,
+							"when": "now",
+							"parameters": [ { "d": "m 424.76254,3.5117273 h 158.34067 c 3.15581,0 5.69641,2.5406 5.69641,5.6964126 V 55.173526 c 0,3.155813 -2.5406,5.696413 -5.69641,5.696413 H 424.76254 c -3.15581,0 -5.69641,-2.5406 -5.69641,-5.696413 V 9.2081399 c 0,-3.1558126 2.5406,-5.6964126 5.69641,-5.6964126 z" }]}],[
+							{
+							"element": "#y-sig > #z1",
+							"modifier": "stroke",
+							"parameters": ["#ff8000"]
+							},
+							{
+							"element": "#z1-text",
+							"modifier": "opacity",
+							"parameters": [1]
+							}
+							 ],[
+							{
+							"element": "#y-sig > #z2",
+							"modifier": "stroke",
+							"parameters": ["#ff8000"]
+							},
+							{
+							"element": "#z2-text",
+							"modifier": "opacity",
+							"parameters": [1]
+							}				
+							]]
+							}
+							-->
+					</section>
+	
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Signal Model</h2>
+						
+						<div data-id="animate_sig" data-animate data-load="assets/Signal_model_ani_lic.svg">
+							<!--
+							{
+							"setup": [
+							{
+							"element": "#hide > #rect1",
+							"modifier": "opacity",
+							"parameters": [0]
+							},
+							{
+							"element": "#y-text",
+							"modifier": "opacity",
+							"parameters": [1]
+							},
+							{
+							"element": "#z1-text",
+							"modifier": "opacity",
+							"parameters": [1]
+							},
+							{
+							"element": "#z2-text",
+							"modifier": "opacity",
+							"parameters": [1]
+							},
+							{
+							"element": "#y-sig > #z1",
+							"modifier": "stroke",
+							"parameters": ["#ff8000"]
+							}
+							,
+							{
+							"element": "#y-sig > #z2",
+							"modifier": "stroke",
+							"parameters": ["#ff8000"]
+							}
+							]
+							}
+							-->
+							</div>
+							<p><span>
+								\[ y_m(t) = \sum_n \class{orangeColor}{s_m\left(t-\kappa_n\right)} + e_m(t) \mathrm{,}\] 
+							</span> 
+							<span class="fragment">
+								$s_m(t-\kappa_n)$: $n$th footstep for geophone $m$ <br> 
+								$\kappa_n$: time for footstep $n$ <br> 
+								$e_m(t)$: ambient noise</span></p>
+					</section>
+				</section>
+
+				
+				
+				
+				<section>
+
+					<!-- <section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Experimental setup</h2>
+						<span class="fragment appear-disappear"></span>
+
+						<div>
+							<img src="assets/hardware_overview_dark.svg" alt="experimental_setup" style="height: 400px;position: relative;top: 0px;left: -30px;">
+							
+							<img src="assets/tikz/tikz_to_pdf_3.svg" alt="experimental_setup" style="height: 380px; position: relative; top: -10px;left: 30px;">
+					</section> -->
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Experimental setup</h2>
+						<span class="fragment appear-disappear"></span>
+
+						<div class="twocolumn">
+							<img src="assets/hardware_overview_dark.svg" alt="experimental_setup" style="height: 400px;position: relative;top: 0px;left: 140px;">
+							
+							<!-- <img src="assets/tikz/tikz_to_pdf_3.svg" alt="experimental_setup" style="height: 380px; position: relative; top: -10px;"> -->
+							<div data-animate data-load="assets/tikz/tikz_to_pdf_3.svg" style="position: relative;top: 30px; left: -20px;" >
+								<!--
+								{
+								"setup": [
+								{
+								"element": "#path11,#path12,#path13,#path14",
+								"modifier": "opacity",
+								"parameters": [0]
+								}
+								],
+								"animation":[
+								[],
+								[
+								{
+								"element": "#path1",
+								"modifier": "opacity",
+								"parameters": [0]
+								},
+								{
+								"element": "#path11,#path12,#path13,#path14",
+								"modifier": "opacity",
+								"parameters": [1]
+								}			
+								]]
+								}
+								-->
+						</div>
+					</section>
+					
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Experimental setup</h2>
+						<img src="assets/Elephant_drone_shot_new_shaded.png" alt="experimental_setup" 
+						style="height: 650px; clip-path: inset(100px 120px 50px 120px);margin-top:-100px;">
+					</section>
+					
+				</section>
+				
+				
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Signal Characteristics</h2>
+						<img src="assets/tikz/tikz_to_pdf_11.svg" alt="Elephant_signal" style="height: 450px;">
+						<img src="assets/tikz/tikz_to_pdf_12.svg" alt="FFT_sig" style="height: 200px;">
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Signal Characteristics</h2>
+						<img src="assets/tikz/tikz_to_pdf_11.svg" alt="Elephant_signal" style="height: 250px;">
+						<img src="assets/tikz/tikz_to_pdf_12.svg" alt="FFT_sig" style="height: 450px;">
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Signal Characteristics</h2>
+						<img src="assets/tikz/tikz_to_pdf_13.svg" alt="FFT_30_steps" style="height: 500px;">
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Noise Characteristics</h2>
+						<img src="assets/tikz/tikz_to_pdf_14.svg" alt="FFT_noise" style="height: 500px;">
+					</section>
+
+				
+				</section>
+
+				<section>
+					<section>
+						<h2>Elephant Footstep Detection</h2>
+						<img src="assets/tikz/tikz_to_pdf_10.svg" alt="elephant_detection" style="width: 80%;">
+
+						<aside class="notes">
+							We need 2 out of 3 sensors to detect the elephant footstep.
+						</aside>
+					</section>
+					<section>
+						<h2>Pre-processing</h2>
+						<ul>
+							<li>Bandpass filter between 4 and 30 Hz
+							<li>Hanning Window</li>
+						</ul>
+
+						<aside class="notes">
+							Spectral leakage
+						</aside> 
+					</section>
+					<section>
+						<h2>Signal Feature</h2>
+						<ul>
+							<li>Fast Fourier transform.</li>
+							<li>Normalized amplitude.</li>
+							<li>Frequency content between 8 and 23 Hz. </li>
+							<!-- <li>Frequency distribution</li> -->
+						</ul>
+						\[\frac{\mbox{Energy in 8-23 Hz}}{\mbox{Energy in 4-30 Hz}} \geq T \]
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<div>
+							<h2 data-id="animate_20">Detection Results</h2>
+							<img src="assets/tikz/tikz_to_pdf_15.svg" alt="Detection and DOA Training" style="height: 500px;">
+						</div> 
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Tracking Results</h2>
+						<img src="assets/tikz/tikz_to_pdf_16.svg" alt="KF Tracking" style="height: 500px;">
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Tracking Results</h2>
+						<div class="fragment strike">
+							<video data-autoplay loop style="height:500px;">
+							<source type="video/mp4" src="assets/ElephantDOAEstimationUsingaGeophoneNetwork.mp4">
+							</video>
+						</div>
+						<!-- <video class="fragment" loop src="assets/ElephantDOAEstimationUsingaGeophoneNetwork.mp4" style="height:520px;"></video> -->
+						 <!-- notes -->
+						<aside class="notes">
+							~ 21 min
+						</aside>
+					</section>
+				</section>
+				
+				<section>
+					<h2>Summary - Elephant </h2>
+					<div>
+						<ul>
+							<li>Detection and DOA estimation of elephants. </li>
+							<li class="fragment fade-left">Works well within 15-40 meters.</li>
+							<li class="fragment fade-left">Direction of arrival estimate is accurate.</li>
+						</ul>
+					</div>
+				</section>
+					
+
+				<section>
+					<h2 style="margin-top: 50px;">Directional Sensitivity DOA</h2>
+					<img src="assets/tikz/tikz_to_pdf_2.svg" alt="DOA" style="height: 500px;position: relative;top:-20px;left: 0px">
+					<small class="highlights_ref" data-fragment-index="0" style="position: relative;top:-270px;left: 320px;width: 46.4%;"> [2] Zetterqvist, et al. <em>Using Received Power in Microphone Arrays to Estimate Direction of Arrival</em>. In ICASSP 2023. <br> 
+					[3] Zetterqvist, et al. <em>Directional
+					Sensitivity-Based DOA Estimation Using a Fourier Series Model</em>. <br>IEEE Sensors Journal.</small>
+					<aside class="notes">
+						~ 22-23 min
+					</aside>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Motivation</h2>
+						<ul>
+							<li>Classical methods rely on time-differences.</li>
+							<li>Requries separation of the sensors in space.</li>
+							<li>Placing them to far appart leads to ambiguity in DOA.</li>
+							<li>Placing them to close decrease DOA resolution.</li>
+						</ul>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+							<h2>Motivation</h2>
+							<span class="fragment appear-disappear"></span>
+							<span class="fragment appear-disappear"></span>
+							
+							<div data-id="animate_sig" data-animate data-load="assets/tikz/tikz_to_pdf_5.svg">
+								<!--
+								{
+								"setup": [
+								{
+								"element": "#doa_arrow, #doa_arc,#psi, #v_psi,#tau_1,#tau_2,#dashed_sensor1,#dashed_sensor2,#dotted_path,#tau_1_curl,#tau_2_curl,#arrow, #wave-1,#wave-2,#wave-3",
+								"modifier": "opacity",
+								"parameters": [0]
+								},
+								{
+								"element": "#arrow-line",
+								"modifier": "stroke",
+								"parameters": [40.6] 
+								}
+								],
+								"animation":[
+								[],[
+								{
+								"element": "#sensor1,#sensor2",
+								"modifier": "opacity",
+								"parameters": [1]
+								},							 
+								{
+								"element": "#sensor1",
+								"modifier": "dmove",
+								"parameters": [55,-13],
+								"duration": 1000						
+								},							 
+								{
+								"element": "#sensor1-text",
+								"modifier": "dmove",
+								"parameters": [55,13],
+								"delay": -1000,
+								"duration": 1000				
+								},							 
+								{
+								"element": "#sensor2",
+								"modifier": "dmove",
+								"parameters": [-49,12],
+								"duration": 1000						
+								},							 
+								{
+								"element": "#sensor2-text",
+								"modifier": "dmove",
+								"parameters": [-49,-12],
+								"delay": -1000,
+								"duration": 1000				
+								},							 
+								{
+								"element": "#tau_1_curl",
+								"modifier": "transform",
+								"parameters": [{"a":"1.3333333","b":"0","c":"0","d":"-1.2","e":"128.353","f":"95.606596"}],
+								"delay": 0,
+								"duration": 500						
+								}
+								],
+								[
+								{
+								"element": "#wave-1",
+								"modifier": "opacity",
+								"parameters": [1],
+								"delay": 100
+								},
+								{
+								"element": "#wave-2",
+								"modifier": "opacity",
+								"parameters": [1],
+								"delay": 100
+								},
+								{
+								"element": "#wave-3",
+								"modifier": "opacity",
+								"parameters": [1],
+								"delay": 100							
+								},
+								{
+								"element": "#arrow-line",
+								"modifier": "attr",
+								"duration": 4000,
+								"parameters": [ {"stroke-dashoffset":"0"} ],
+								"delay": 200
+								},
+								{
+								"element": "#arrow",
+								"modifier": "opacity",
+								"parameters": [1],
+								"delay": -1800
+								},
+								{
+								"element": "#dotted_path",
+								"modifier": "opacity",
+								"parameters": [1]
+								}
+								]
+								]
+								}
+								-->
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>General Idea</h2>
+						<div>
+							<span class="fragment appear-disappear"></span> 
+
+							<img 
+							src="assets/1_mic_flat.svg" alt="1 mic flat" style="height: 350px;margin: 25px;">
+							<span
+							data-id="animate_sig" data-animate data-load="assets/tikz/tikz_to_pdf_28_0.svg">
+								<!--
+								{
+								"setup": [
+								{
+								"element": "#middle",
+								"modifier": "opacity",
+								"parameters": [1]
+								},
+								{
+								"element": "#dir_sens",
+								"modifier": "attr",
+								"parameters": [{"stroke-dashoffset":"588.87","stroke-dasharray":"588.87","fill-opacity":0} ]
+								}
+								],
+								"animation":[
+								[],[
+								{
+								"element": "#dir_sens",
+								"modifier": "attr",
+								"duration": 4000,
+								"parameters": [ {"stroke-dashoffset":"0"} ],
+								"delay": 200
+								},
+								{
+								"element": "#dir_sens",
+								"modifier": "attr",
+								"parameters": [{"fill-opacity":0.15}],
+								"delay": -1800
+								}
+								]
+								]
+								}
+								-->		
+						</span>					
+						</div>
+
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>General Idea</h2>
+						<div>
+							<span class="fragment appear-disappear"></span> 
+
+							<img src="assets/1_mic_standing.svg" alt="1 mic standing" style="height: 350px;margin: 25px;">
+							<span style="position: relative;top: 50px;left: 0px;"
+							data-id="animate_sig" data-animate data-load="assets/tikz/tikz_to_pdf_29_0.svg">
+								<!--
+								{
+								"setup": [
+								{
+								"element": "#middle",
+								"modifier": "opacity",
+								"parameters": [1]
+								},
+								{
+								"element": "#dir_sens",
+								"modifier": "attr",
+								"parameters": [{"stroke-dashoffset":"605.16","stroke-dasharray":"605.16","fill-opacity":0} ]
+								}
+								],
+								"animation":[
+								[],[
+								{
+								"element": "#dir_sens",
+								"modifier": "attr",
+								"duration": 4000,
+								"parameters": [ {"stroke-dashoffset":"0"} ],
+								"delay": 200
+								},
+								{
+								"element": "#dir_sens",
+								"modifier": "attr",
+								"parameters": [{"fill-opacity":0.15}],
+								"delay": -1800
+								}
+								]
+								]
+								}
+								-->		
+						</span>		
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="none" data-transition="none">
+						<h2>General Idea</h2>
+						<div>
+							<span class="fragment appear-disappear" data-fragment-index="1"></span> 
+
+							<img src="assets/4_mics.svg" alt="4 mic flat" style="height: 350px;margin: 25px;">
+							<span style="position: relative;top: 50px;left: 0px;"
+							data-id="animate_sig" data-animate data-load="assets/tikz/tikz_to_pdf_30_0.svg">
+								<!--
+								{
+								"setup": [
+								{
+								"element": "#middle",
+								"modifier": "opacity",
+								"parameters": [1]
+								},
+								{
+								"element": "#dir_sens_1,#dir_sens_2,#dir_sens_3,#dir_sens_4",
+								"modifier": "attr",
+								"parameters": [{"stroke-dashoffset":"383.49","stroke-dasharray":"383.49","fill-opacity":0} ]
+								}
+								],
+								"animation":[
+								[],[
+								{
+								"element": "#dir_sens_1",
+								"modifier": "attr",
+								"duration": 4000,
+								"parameters": [ {"stroke-dashoffset":"0"} ],
+								"delay": 200
+								},
+								{
+								"element": "#dir_sens_1",
+								"modifier": "attr",
+								"parameters": [{"fill-opacity":0.15}],
+								"delay": -1800
+								},
+								{
+								"element": "#dir_sens_2",
+								"modifier": "attr",
+								"duration": 4000,
+								"parameters": [ {"stroke-dashoffset":"0"} ],
+								"delay": 200
+								},
+								{
+								"element": "#dir_sens_2",
+								"modifier": "attr",
+								"parameters": [{"fill-opacity":0.15}],
+								"delay": -1800
+								},
+								{
+								"element": "#dir_sens_3",
+								"modifier": "attr",
+								"duration": 4000,
+								"parameters": [ {"stroke-dashoffset":"0"} ],
+								"delay": 200
+								},
+								{
+								"element": "#dir_sens_3",
+								"modifier": "attr",
+								"parameters": [{"fill-opacity":0.15}],
+								"delay": -1800
+								},
+								{
+								"element": "#dir_sens_4",
+								"modifier": "attr",
+								"duration": 4000,
+								"parameters": [ {"stroke-dashoffset":"0"} ],
+								"delay": 200
+								},
+								{
+								"element": "#dir_sens_4",
+								"modifier": "attr",
+								"parameters": [{"fill-opacity":0.15}],
+								"delay": -1800
+								}
+								]
+								]
+								}
+								-->		
+						</span>		
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="none" data-transition="none">
+						<h2>General Idea</h2>
+						<div>
+							<img class="hidden" src="assets/4_mics.png" alt="4 mic flat" style="height: 200px;margin: 100px;">
+							<img style="height: 440px;"
+							data-id="animate_sig" src="assets/tikz/tikz_to_pdf_30_0.svg">	
+						</span>		
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="none" data-transition="none">
+						<h2>General Idea</h2>
+						<div>
+							<img style="height: 480px;position: relative;left: -187px;top: 113px; margin-top: -70px;"
+							data-id="animate_sig" src="assets/tikz/tikz_to_pdf_30_0.svg">	
+							<!-- <img style="height: 300px;"
+							data-id="animate_sig" src="assets/tikz/tikz_to_pdf_18.svg">	 -->
+						</div>
+					</section>
+					<section data-transition="none">
+						<h2 style="margin-bottom: 50px;">General Idea</h2>
+						<div style="margin-top: 30px;margin-bottom: 70px;">
+							<span class="fragment appear-disappear" data-fragment-index="1"></span> 
+							<span class="fragment appear-disappear" data-fragment-index="2"></span> 
+							<span class="fragment appear-disappear" data-fragment-index="3"></span> 
+
+
+							<span style="position: relative;top: 50px;left: 0px;"
+							data-id="animate_sig" data-animate data-load="assets/tikz/tikz_to_pdf_2_ani.svg">
+								<!--
+								{
+								"setup": [
+								{
+								"element": "#ds_1,#ds_2,#ds_3,#ds_4,#arrow_head,#speaker,#source_text,#wave_1,#wave_2,#wave_3",
+								"modifier": "opacity",
+								"parameters": [0]
+								},
+								{
+								"element": "#arrow_line",
+								"modifier": "attr",
+								"parameters": [{"stroke-dashoffset":"110.55","stroke-dasharray":"110.55"} ]
+								}
+								],
+								"animation":[
+								[
+								{
+								"element": "#speaker,#source_text,#wave_1,#wave_2,#wave_3",
+								"modifier": "opacity",
+								"parameters": [1]
+								}
+								],[
+								{
+								"element": "#arrow_line",
+								"modifier": "attr",
+								"duration": 4000,
+								"parameters": [ {"stroke-dashoffset":"0"} ],
+								"delay": 200
+								},
+								{
+								"element": "#arrow_head",
+								"modifier": "opacity",
+								"parameters": [1]
+								}
+								],[
+								{
+								"element": "#ds_1,#ds_2,#ds_3,#ds_4",
+								"modifier": "opacity",
+								"parameters": [1],
+								"delay": 500
+								}
+								]
+								]
+								}
+								-->		
+						</span>	
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true" data-transition="none">
+						<h2>General Idea</h2>
+						<div>
+							<img style="height: 400px;position: relative;left:0px;top: 0px; margin-top: 80px;"
+							data-id="animate_sig" src="assets/tikz/tikz_to_pdf_2_no_speker.svg">	
+							<!-- <img style="height: 300px;"
+							data-id="animate_sig" src="assets/tikz/tikz_to_pdf_18.svg">	 -->
+						</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>General Idea</h2>
+						<div>
+							<img style="height: 330px;position: relative;left:0px;top: -50px;margin-right: -190px;"
+							data-id="animate_sig" src="assets/tikz/tikz_to_pdf_2_no_speker.svg">	
+							<img style="height: 330px;margin-top: 80px;"
+							data-id="animate_sig" src="assets/tikz/tikz_to_pdf_18.svg">	
+						</div>
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Signal model</h2>
+						<span class="r-stack">
+							<span class="fragment fade-out" data-fragment-index="2"> \[ y_m[l] = s[l-\delta_m] + e[l] \] </span>
+							<span class="fragment fade-out"  data-fragment-index="4">
+							<span class="fragment fade-in"  data-fragment-index="2" data-id="y_m"> \[ y_m[l] = s_m[l] + e[l] \] </span></span>
+							<span class="fragment fade-in"  data-fragment-index="4"> \( y_m[l] = s_m[l] + e[l] \), \(\quad  e[l] \sim \mathcal{N}(0,\sigma_m^2) \)  </span>
+						</span>
+						<span class="r-stack">
+							<span class="fragment fade-out"  data-fragment-index="3">
+								<span class="fragment fade-in"  data-fragment-index="1">\[ P_m = \sum_{l=1}^{L} y_m^2[l]\]</span>
+							</span>
+							<span class="fragment fade-out"  data-fragment-index="5">
+								<span class="fragment fade-in" data-fragment-index="3" data-id="P">\[ P_m =
+								\underbrace{\frac{1}{L} \sum_{l=1}^L s_m^2[l]}_{ P^s_m} + 
+								\underbrace{\frac{1}{L} \sum_{l=1}^L 2 s_m[l] e_m [l]}_{P^{sw}_m} + 
+								\underbrace{\frac{1}{L} \sum_{l=1}^L e_m^2[l]}_{v_m}  \mathrm{,} \] 
+								</span>
+							</span>
+							<span class="fragment fade-out"  data-fragment-index="6">
+								<span class="fragment fade-in" data-fragment-index="5" data-id="P">\[ P_m =\underbrace{\frac{1}{L} \sum_{l=1}^L s_m^2[l]}_{ P^s_m} + 
+								\underbrace{\frac{1}{L} \sum_{l=1}^L 2 s_m[l] e_m [l]}_{P^{sw}_m \rightarrow 0} + 
+								\underbrace{\frac{1}{L} \sum_{l=1}^L e_m^2[l]}_{v_m}  \mathrm{,} \] 
+								</span>
+							</span>
+							<span class="fragment fade-in" data-fragment-index="6" data-id="P">\[ P_m =\underbrace{\frac{1}{L} \sum_{l=1}^L s_m^2[l]}_{ P^s_m} + 
+									\underbrace{\frac{1}{L} \sum_{l=1}^L 2 s_m[l] e_m [l]}_{P^{sw}_m \rightarrow 0} + 
+									\underbrace{\frac{1}{L} \sum_{l=1}^L e_m^2[l]}_{v_m \sim \mathcal{N}\left(\sigma_m^2,\frac{2\sigma_m^4}{L}\right)}  \mathrm{,} \]
+							</span>
+						</span>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2 style="margin-bottom: 50px;">Signal model</h2>
+						
+							<span > \( P_m = P_m^s + v_m \) </span>
+							<p  data-id="animate_3" class="fragment fade-in"> 
+								\[ P_m(\psi) = \alpha g_m h(\psi,\boldsymbol{\theta}_m) + v_m \] </p>
+							<span class="fragment fade-in"> \(\alpha\): absolute power level <br>
+							 \(g_m\): gain of microphone \(m\) <br>
+							 \(h(\psi,\boldsymbol{\theta}_m)\): directivity pattern </span>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2 style="margin-bottom: 50px;">Fourier series Model</h2>
+							<p  data-id="animate_3"> 
+								\[ P_m(\psi) = \alpha g_m h(\psi,\boldsymbol{\theta}_m) + v_m \] </p>
+							<span class="fragment fade-in"> 
+								\begin{align}
+								h\left(\psi,\boldsymbol{\theta}_m\right)&  = \theta^m_{0} + \sum_{d=1}^D \theta^m_{d,c} \cos(d\psi)+\theta^m_{d,s} \sin(d\psi) \nonumber
+								\end{align} </span>
+							</span>
+							<aside class="notes">
+								360 deg periodic function.
+							</aside>
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2 style="margin-bottom: 50px;">Training</h2>
+							<span> 
+								The parameters \(\boldsymbol{\theta}_m, g_m\) are estimated by minimizing the error between the predicted and the measured power. </span>
+							<span class="fragment fade-in" style="transform: scale(0.8); display: inline-block; transform-origin: top center;">
+								\[\begin{aligned}
+								& \underset{\boldsymbol{\alpha,\, g_{1:M},\, \theta_{1:M}}}{\text{minimize}}
+								& & \sum_{m=1}^M \frac{1}{\eta_m}\sum_{k=1}^K \Big( P_m(\psi_k) - \left(\alpha g_m h\left(\psi_k, \boldsymbol{\theta}_m\right) + \sigma_m^2\right) \Big)^2 \\
+								& \text{subject to}
+								&& \alpha > 0 \\
+								&&& g_1 = 1 \\
+								&&& h\left(\psi_m,\boldsymbol{\theta}_m\right) = 1, \qquad \forall \, m = 1,2, \dots , M ,
+								\end{aligned}\]
+							</span>
+					</section>
+				</section>
+
+				
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Experimental Setup</h2>
+						<img src="assets/mic_array_dimensions.svg" alt="Mic dimensions" style="height: 500px;">
+						<img src="assets/MicArraySetup.jpeg" alt="Mic setup" style="height: 500px;">
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Experimental Setup</h2>
+						<img src="assets/tikz/tikz_to_pdf_4.svg" alt="Mic dimensions" style="height: 400px;">
+						<!-- <img src="assets/MicArraySetup.jpeg" alt="Mic setup" style="height: 500px;"> -->
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>19 different sounds</h2>
+						<table>
+							<thead data-id="animate_3">
+								<tr>
+									<th>No.</th>
+									<th>Sound</th>
+									<th>Signal</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>Wideband noise</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 1 - Wideband noise.mp3" type="audio/mp3">
+									</audio></td>
+								</tr>
+								<tr>
+									<td>2-11</td>
+									<td>Sinusoids</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 2-11 - Sinusoids.mp3" type="audio/mp3">
+									</audio></td>
+								</tr>
+								<tr>
+									<td>12</td>
+									<td> Hovering drone</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 12 - Hovering drone.mp3" type="audio/mp3">
+									</audio></td>
+								</tr>
+								<tr>
+									<td>13</td>
+									<td>Elephant trumpet</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 13 - Elephant trumpet.mp3" type="audio/mp3">
+									</audio></td>
+								</tr>
+								<tr>
+									<td>14</td>
+									<td>Police Siren</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 14 - Police siren.mp3" type="audio/mp3">
+									</audio></td>
+								</tr>
+							</tbody>
+							</table>
+						</section>
+						<section data-auto-animate data-auto-animate-unmatched="true">
+							<h2>19 different sounds</h2>
+							<table>
+								<thead data-id="animate_3">
+									<tr>
+										<th>No.</th>
+										<th>Sound</th>
+										<th>Signal</th>
+									</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>15</td>
+									<td>Woman Scream</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 15 - Woman scream.mp3" type="audio/mp3">
+									</audio></td>
+								</tr>
+								<tr>
+									<td>16</td>
+									<td>Wideband noise low</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 16 - Wideband noise low.mp3" type="audio/mp3">
+									</audio></td>
+								</tr>
+								<tr>
+									<td>17</td>
+									<td>Wideband noise high</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 17  - Wideband noise high.mp3" type="audio/mp3">
+									</audio></td>
+								</tr>
+								<tr>
+									<td>18</td>
+									<td>Gunshot</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 18 - Gunshot.mp3" type="audio/mp3">
+									</audio></td>
+								</tr>
+								<tr>
+									<td>19</td>
+									<td>Background noise</td>
+									<td><audio controls>
+										<source src="assets/Rec_Signals/Signal 19 - Background Noise.wav" type="audio/wav">
+									</audio></td>
+								</tr>
+								</tbody>
+						</table>
+					</section>
+
+					
+					
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Data summary</h2>
+						<table>
+							<thead>
+								<tr>
+									<th></th>
+									<th style="text-align: center;" colspan="2" data-id="animate_1">Training</th>
+									<th style="text-align: center; border: none;" colspan="2" class="hidden">Estimation</th>
+								</tr>
+								<tr>
+									<th></th>
+									<th data-id="animate_2">Signals</th>
+									<th data-id="animate_3"># of angles</th>
+									<th class="hidden" style="border: none;">Signals</th>
+									<th class="hidden" style="border: none;"># of angles</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td rowspan="1" style="vertical-align: middle;" data-id="animate_4">Anechoic</td>
+									<td rowspan="1" style="text-align: center;vertical-align: middle;" data-id="animate_5">Signal 1</td>
+									<td rowspan="1" style="text-align: center;vertical-align: middle;" data-id="animate_6">24</td>
+									<td style="border-bottom: none;" class="hidden">Signal 1-17</td>
+									<td style="text-align: center;border-bottom: none;" class="hidden">24</td>
+								</tr>
+								<tr class="hidden"> 
+									<td style="border: none;">Signal 18</td>
+									<td style="text-align: center;border: none;">8</td>
+								</tr>
+								<!-- <tr class="hidden" style="">
+									<td>Outdoor</td>
+									<td style="text-align: center;"> - </td>
+									<td style="text-align: center;"> - </td>
+									<td>Signal 1-17</td>
+									<td style="text-align: center;">10</td>
+								</tr> -->
+							</tbody>
+						</table>
+						
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Data summary</h2>
+						<table>
+							<thead>
+								<tr>
+									<th></th>
+									<th style="text-align: center;" colspan="2" data-id="animate_1">Training</th>
+									<th style="text-align: center;" colspan="2" data-id="animate_21">Estimation</th>
+								</tr>
+								<tr>
+									<th></th>
+									<th data-id="animate_2">Signals</th>
+									<th data-id="animate_3"># of angles</th>
+									<th data-id="animate_22">Signals</th>
+									<th data-id="animate_23"># of angles</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td rowspan="2" style="vertical-align: middle;" data-id="animate_4">Anechoic</td>
+									<td rowspan="2" style="text-align: center;vertical-align: middle;" data-id="animate_5">Signal 1</td>
+									<td rowspan="2" style="text-align: center;vertical-align: middle;" data-id="animate_6">24</td>
+									<td style="border-bottom: none;" data-id="animate_24">Signal 1-17</td>
+									<td style="text-align: center;border-bottom: none;" data-id="animate_25">24</td>
+								</tr>
+								<tr> 
+									<td data-id="animate_26">Signal 18</td>
+									<td style="text-align: center;" data-id="animate_27">8</td>
+								</tr>
+								<tr></tr>
+								<!-- <tr class="hidden">
+									<td>Outdoor</td>
+									<td style="text-align: center;"> - </td>
+									<td style="text-align: center;"> - </td>
+									<td>Signal 1-17</td>
+									<td style="text-align: center;">10</td>
+								</tr> -->
+							</tbody>
+						</table>						
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Data summary</h2>
+						<table>
+							<thead>
+								<tr>
+									<th></th>
+									<th style="text-align: center;" colspan="2" data-id="animate_1">Training</th>
+									<th style="text-align: center;" colspan="2" data-id="animate_21">Estimation</th>
+								</tr>
+								<tr>
+									<th></th>
+									<th data-id="animate_2">Signals</th>
+									<th data-id="animate_3"># of angles</th>
+									<th data-id="animate_22">Signals</th>
+									<th data-id="animate_23"># of angles</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td rowspan="2" style="vertical-align: middle;" data-id="animate_4">Anechoic</td>
+									<td rowspan="2" style="text-align: center;vertical-align: middle;" data-id="animate_5">Signal 1</td>
+									<td rowspan="2" style="text-align: center;vertical-align: middle;" data-id="animate_6">24</td>
+									<td style="border-bottom: none;" data-id="animate_24">Signal 1-17</td>
+									<td style="text-align: center;border-bottom: none;" data-id="animate_25">24</td>
+								</tr>
+								<tr> 
+									<td data-id="animate_26">Signal 18</td>
+									<td style="text-align: center;" data-id="animate_27">8</td>
+								</tr>
+								<tr>
+									<td>Outdoor</td>
+									<td style="text-align: center;"> - </td>
+									<td style="text-align: center;"> - </td>
+									<td>Signal 1-17</td>
+									<td style="text-align: center;">10</td>
+								</tr>
+							</tbody>
+						</table>						
+					</section>
+				</section>
+
+
+				<section>
+					<section>
+						<h2> Fourier Series Order</h2>
+						<img src="assets/tikz/tikz_to_pdf_20.svg" alt="FS Model Fit" style="height: 400px;">
+						<!-- notes -->
+						<aside class="notes">
+							~ 30 min
+						</aside>
+					    
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> DOA Estimation</h2>
+						<span>
+							\begin{align}
+							\hat{P}_m(\psi) &= \alpha \underbrace{\hat{g}_m h(\psi,\boldsymbol{\hat{\theta}}_m)}_{\hat{h}_m(\psi)} + \sigma^2_m \\
+							\end{align}
+						</span>
+
+						<span class="fragment fade-in">
+							\[\begin{align}
+							\hat{\psi} &= \arg\max_{\psi} \frac{\left( \sum_{m=1}^M \hat{h}_m(\psi) (P_m-\sigma_m^2) \right)^2}{\sum_{m=1}^M \hat{h}_m^2(\psi)} \\
+							\hat{\alpha}  &= \frac{\sum_{m=1}^M \hat{h}_m(\hat{\psi}) (P_m-\sigma_m^2)}{\sum_{m=1}^M \hat{h}_m^2(\hat{\psi})} 
+							\end{align}\]
+						</span>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Result </h2>
+						<img src="assets/tikz/tikz_to_pdf_21.svg" alt="DOA Estimation Hist error" style="height: 530px;">
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Cramér-Rao Lower Bound</h2>
+						<img src="assets/tikz/tikz_to_pdf_22.svg" alt="CRLB wn model" style="height: 450px;">
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Noise distribution</h2>
+						<span>\[ P_m =\alpha g_m h(\psi,\boldsymbol{\theta}_m) + v_m , \quad v_m \sim \mathcal{N}\left(\sigma_m^2,\eta_m\right) \]
+					</span>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false" data-transition="none">
+						<h2> Noise distribution</h2>
+						<img src="assets/tikz/DirSensWnNoiseDist_1.svg" alt="DirSensMeas" style="height: 500px;">
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="false" data-transition="none">
+						<h2> Noise distribution</h2>
+						<img src="assets/tikz/DirSensWnNoiseDist_2.svg" alt="DirSensNoiseDistPolar" style="height: 500px;">
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Noise distribution</h2>
+						<img src="assets/tikz/DirSensWnNoiseDist_3.svg" alt="DirSensNoiseDist" style="height: 500px;">
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Noise distribution</h2>
+						<img src="assets/tikz/DirSensWnNoiseDist_4.svg" alt="DirSensNoiseDistdB" style="height: 500px;">
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Noise distribution</h2>
+						<p> 
+							Introduce model in dB scale as
+						</p>
+						<span>\[ \bar{P}_m = \bar{\alpha} + \bar{g}_m + h(\psi, \bar{\boldsymbol{\theta}}_m) + \bar{v}_m , \quad \bar{v}_m \sim \mathcal{N}\left(\bar{\sigma}_m^2, \bar{\eta} \right) \]
+					</span>
+					</section>
+				</section>
+
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+					<h2>Frequency Dependency</h2>
+					<div class="twocolumn">
+						<span class="fragment appear-disappear" data-fragment-index="2"></span> 
+						<span class="fragment appear-disappear" data-fragment-index="3"></span> 
+
+						<span 
+							data-animate data-load="assets/tikz/tikz_to_pdf_31_ani.svg">
+								<!--
+								{
+								"setup": [
+								{
+								"element": "#arrow",
+								"modifier": "opacity",
+								"parameters": [0]
+								}
+								],
+								"animation":[
+								[],
+								[],
+								[
+								{
+								"element": "#arrow",
+								"modifier": "opacity",
+								"parameters": [1]
+								}
+								],[
+								{
+								"element": "#arrow",
+								"modifier": "dmove",
+								"parameters": [30.5, -23]
+								}
+								],[
+								{
+								"element": "#arrow",
+								"modifier": "dmove",
+								"parameters": [39, -20]
+								}
+								],[
+								{
+								"element": "#arrow", 
+								"modifier": "dmove",
+								"parameters": [39.5, -8]
+								}
+								],[
+								{
+								"element": "#arrow", 
+								"modifier": "dmove",
+								"parameters": [37, -10]
+								}
+								],[
+								{
+								"element": "#arrow", 
+								"modifier": "dmove",
+								"parameters": [39.5, 5]
+								}
+								],[
+								{
+								"element": "#arrow", 
+								"modifier": "dmove",
+								"parameters": [39.5, 12]
+								}
+								],[
+								{
+								"element": "#arrow", 
+								"modifier": "dmove",
+								"parameters": [39.5, 12]
+								}
+								],[
+								{
+								"element": "#arrow", 
+								"modifier": "dmove",
+								"parameters": [39.5, 22]
+								}
+								]
+								]
+								}
+								-->		
+						</span>	
+						<!-- <img style="height: 330px;" src="assets/tikz/tikz_to_pdf_31.svg">	 -->
+						 <span class="r-stack">
+							<figure class="fragment fade-in-then-out" data-fragment-index="1" style="display: inline;">
+								<img style="height: 360px;" src="assets/tikz/tikz_to_pdf_29_0.svg" alt="Description of the image">
+								<figcaption style="text-align: center;">Wideband noise</figcaption>
+							</figure>
+							<figure class="fragment fade-in-then-out" data-fragment-index="2" style="display: inline;">
+								<img style="height: 400px;" src="assets/tikz/DirSens_1.svg" alt="Description of the image">
+								<figcaption style="text-align: center;margin-top: -60px;"> 250 Hz</figcaption>
+							</figure>
+							<figure class="fragment fade-in-then-out" data-fragment-index="3" style="display: inline;">
+								<img style="height: 400px;" src="assets/tikz/DirSens_2.svg" alt="Description of the image">
+								<figcaption style="text-align: center;margin-top: -60px;"> 1250 Hz</figcaption>
+							</figure>	
+							<figure class="fragment fade-in-then-out" data-fragment-index="4" style="display: inline;">
+								<img style="height: 400px;" src="assets/tikz/DirSens_3.svg" alt="Description of the image">
+								<figcaption style="text-align: center;margin-top: -60px;"> 2500 Hz</figcaption>
+							</figure>
+							<figure class="fragment fade-in-then-out" data-fragment-index="5" style="display: inline;">
+								<img style="height: 400px;" src="assets/tikz/DirSens_4.svg" alt="Description of the image">
+								<figcaption style="text-align: center;margin-top: -60px;"> 3750 Hz</figcaption>
+							</figure>	
+							<figure class="fragment fade-in-then-out" data-fragment-index="6" style="display: inline;">
+								<img style="height: 400px;" src="assets/tikz/DirSens_5.svg" alt="Description of the image">
+								<figcaption style="text-align: center;margin-top: -60px;"> 5000 Hz</figcaption>
+							</figure>	
+							<figure class="fragment fade-in-then-out" data-fragment-index="7" style="display: inline;">
+								<img style="height: 400px;" src="assets/tikz/DirSens_6.svg" alt="Description of the image">
+								<figcaption style="text-align: center;margin-top: -60px;"> 6250 Hz</figcaption>
+							</figure>	
+							<figure class="fragment fade-in-then-out" data-fragment-index="8" style="display: inline;">
+								<img style="height: 400px;" src="assets/tikz/DirSens_7.svg" alt="Description of the image">
+								<figcaption style="text-align: center;margin-top: -60px;"> 7500 Hz</figcaption>
+							</figure>	
+							<figure class="fragment fade-in-then-out" data-fragment-index="9" style="display: inline;">
+								<img style="height: 400px;" src="assets/tikz/DirSens_8.svg" alt="Description of the image">
+								<figcaption style="text-align: center;margin-top: -60px;"> 8750 Hz</figcaption>
+							</figure>					
+							<figure class="fragment fade-in" data-fragment-index="10" style="display: inline;">
+								<img style="height: 400px;" src="assets/tikz/DirSens_9.svg" alt="Description of the image">
+								<figcaption style="text-align: center;margin-top: -60px;"> 10 000 Hz</figcaption>
+							</figure>	
+						 </span>
+
+					</div>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Frequency Dependency</h2>
+						<img src="assets/tikz/tikz_to_pdf_23.svg" alt="DirSens" style="height: 500px;">
+					</section>
+					<!-- <section data-auto-animate data-auto-animate-unmatched="true">
+						<h2>Frequency Dependency</h2>
+						<img src="assets/tikz/tikz_to_pdf_19_upper.svg" alt="Methods" style="height: 500px;">
+					</section> -->
+					<section data-auto-animate data-auto-animate-unmatched="false">
+						<span class="fragment appear-disappear"></span>
+						<span class="fragment appear-disappear"></span>
+
+						<h2>Frequency Dependency</h2>
+						<!-- <img src="assets/tikz/tikz_to_pdf_19_with_freq.svg" alt="Methods" style="height: 500px;"> -->
+						<span 
+							data-animate data-load="assets/tikz/tikz_to_pdf_19_with_freq.svg">
+								<!--
+								{
+								"setup": [
+								{
+								"element": "#g19,#g20,#g22",
+								"modifier": "opacity",
+								"parameters": [-1]
+								}
+								],
+								"animation":[
+								[],
+								[
+								{
+								"element": "#g19,#g20",
+								"modifier": "opacity",
+								"parameters": [1]
+								}
+								],
+								[
+								{
+								"element": "#g19,#g20",
+								"modifier": "opacity",
+								"parameters": [0]
+								},
+								{
+								"element": "#g22",
+								"modifier": "opacity",
+								"parameters": [1]
+								}
+								]
+								]
+								}
+								-->		
+						</span>	
+					</section>
+					<!-- <section data-auto-animate data-auto-animate-unmatched="false" >
+						<h2>Frequency Dependency</h2>
+						<img src="assets/tikz/tikz_to_pdf_19.svg" alt="Methods" style="height: 500px;">
+					</section> -->
+				</section>
+				<section>
+					<section data-auto-animate data-auto-animate-unmatched="true" >
+						<h2>Results</h2>
+						<img src="assets/tikz/tikz_to_pdf_24.svg" alt="CompMethods" style="height: 500px;">
+						<aside class="notes">
+							~ 37 min
+						</aside>
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true" >
+						<h2>Results</h2>
+						<img src="assets/tikz/ViolinPlot_1.svg" alt="ViolinAnechoic" style="height: 660px;margin-top: -70px;margin-bottom: -100px;">
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true" >
+						<h2>Results</h2>
+						<img src="assets/tikz/ViolinPlot_2.svg" alt="ViolinOutdoor" style="height: 660px;margin-top: -70px;margin-bottom: -100px;">
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true" >
+						<h2>Results</h2>
+						<div style="transform: scale(0.8); transform-origin: center;">
+							<table>
+								<thead>
+									<tr style="border-bottom: solid;">
+										<th></th>
+										<th>Signal No.</th>
+										<th>Proposed</th>
+										<th>MUSIC</th>
+										<th>MVDR</th>
+										<th>MCCC</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td rowspan="3" style="vertical-align: middle;"><strong>Anechoic</strong></td>
+										<td>1-17</td>
+										<td>11.62</td>
+										<td>60.04</td>
+										<td>27.07</td>
+										<td><strong style="color:  rgb(101, 179, 101);">0.99</strong></td>
+									</tr>
+									<tr>
+										<td>1, 12-17</td>
+										<td><strong style="color:  rgb(101, 179, 101);">0.45</strong></td>
+										<td>15.33</td>
+										<td>22.51</td>
+										<td>0.79</td>
+									</tr>
+									<tr style="border-bottom: solid;">
+										<td>18</td>
+										<td>1.42</td>
+										<td>9.68</td>
+										<td>92.43</td>
+										<td><strong style="color:  rgb(101, 179, 101);">0.58</strong></td>
+									</tr>
+									<tr>
+										<td rowspan="2" style="vertical-align: middle;"><strong>Outdoor</strong></td>
+										<td>1-17</td>
+										<td><strong style="color:  rgb(101, 179, 101);">5.14</strong></td>
+										<td>74.25</td>
+										<td>76.08</td>
+										<td>42.03</td>
+									</tr>
+									<tr style="border-bottom: solid;">
+										<td>1, 12-17</td>
+										<td>3.10</td>
+										<td>29.15</td>
+										<td>59.23</td>
+										<td><strong style="color: rgb(101, 179, 101);">2.78</strong></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<aside class="notes">
+							RMSE in degrees.
+						</aside>
+					</section>
+
+					<section data-auto-animate data-auto-animate-unmatched="true">
+						<h2> Cramér-Rao Lower Bound</h2>
+						<img src="assets/tikz/tikz_to_pdf_25.svg" alt="CRLB wn out" style="height: 450px;">
+					</section>
+					<section data-auto-animate data-auto-animate-unmatched="true" data-visibility="hidden">
+						<h2> Cramér-Rao Lower Bound</h2>
+						<img src="assets/tikz/tikz_to_pdf_26.svg" alt="CRLB Sinusoids" style="width: 1600px;">
+					</section>
+				</section>
+				<section>
+					
+						<h2>Summary - Directional Sensitivity </h2>
+						<div style="width: 1000px;margin: 0 auto;text-align: center">
+						<ul>
+							<li class="fragment semi-fade-out" data-fragment-index="1"><b style="color: rgb(149, 230, 255);">DOA Estimation Method</b>: Utilizes directional sensitivity; requires calibration.</li>
+							<li class="fragment fade-in-then-semi-out" data-fragment-index="1"><b style="color: rgb(149, 230, 255);">Successful Experiments</b>: Eight-microphone array estimated DOA for 18 signal types, effective for frequencies above 1000 Hz.</li>
+							<li class="fragment fade-in"><b style="color: rgb(149, 230, 255);">Robust Performance</b>: Maintains accuracy over time and temperature; enables high-resolution DOA estimation with smaller arrays.</li>
+						</ul>
+					</div>
+					<aside class="notes">
+						~ 41 min
+					</aside>
+					
+				</section>
+				<section>
+
+					<section data-auto-animate>
+						<h2>Conclusions</h2>
+						<div style="width: 1000px;margin: 0 auto;text-align: center">
+						<ul>
+							<li class="fragment semi-fade-out" data-fragment-index="1">  
+								Elephant foosteps have a <b style="color: rgb(149, 230, 255);">unique signature</b> that can be detected using a geophone array. </li>
+							<li class="fragment fade-in-then-semi-out" data-fragment-index="1"> 
+								A conventional Delay-and-Sum beamformer was used to estimate the <b style="color: rgb(149, 230, 255);">DOA of elephant footsteps</b>. </li>
+							<li class="fragment fade-in-then-semi-out"> 
+								<b style="color: rgb(149, 230, 255);">Directional sensitivity DOA</b> estimation was introduced to remove the need for sensor separation.
+							 </li>
+							<li class="fragment fade-in-then-semi-out">
+								The directional sensitivity of the microphone was modeled using a <b style="color: rgb(149, 230, 255);">Fourier series</b>. </li>
+						</ul>
+					</div>
+					</section>
+
+					<section data-auto-animate>
+						<h2>Conclusions</h2>
+						<div style="width: 1000px;margin: 0 auto;text-align: center">
+						<ul>
+							<!-- <li>
+								The directional sensitivity of the microphone was modeled using a Fourier series. </li> -->
+							<li class="fragment semi-fade-out" data-fragment-index="1"> 
+								The method was evaluated on <b style="color: rgb(149, 230, 255);">18 different sounds</b> in an anechoic chamber and outdoors. </li>
+							<li class="fragment fade-in-then-semi-out" data-fragment-index="1"> 
+								The <b style="color: rgb(149, 230, 255);">CRLB</b> shows that the proposed method is far from to the theoretical limit. Due to bias and model error.
+							</li>
+							<li class="fragment fade-in-then-semi-out">
+								The proposed method <b style="color: rgb(149, 230, 255);">performs on par</b> with conventional methods in both anechoic and outdoor environments.
+							</li>
+						</ul>
+					</div>
+					</section>
+
+				
+					<section data-auto-animate>
+						<h2>Future Work</h2>
+						<div style="width: 1000px;margin: 0 auto;text-align: center">
+						<ul>
+							<li class="fragment semi-fade-out" data-fragment-index="1">Investigate the effect of <b style="color: rgb(149, 230, 255);">reverberations</b> to potentially improve robustness and accuracy in complex acoustic environments.</li>
+							<li class="fragment fade-in-then-semi-out" data-fragment-index="1">Address <b style="color: rgb(149, 230, 255);">model errors</b> in microphone directional sensitivity to refine performance in diverse conditions.</li>
+							<li class="fragment fade-in-then-semi-out">Test with more <b style="color: rgb(149, 230, 255);">complex signals</b> (e.g., speech) to evaluate real-world effectiveness.</li>
+						</ul>
+						</div>
+					</section>
+					<section data-auto-animate>
+						<h2>Future Work</h2>
+						<div style="width: 1000px;margin: 0 auto;text-align: center">
+						<ul>
+							<li class="fragment semi-fade-out" data-fragment-index="1">Explore the method's applicability to detecting elephant footsteps, considering <b style="color: rgb(149, 230, 255);">variations in individual elephants</b> and multi-target tracking of herds.</li>
+							<li class="fragment fade-in-then-semi-out" data-fragment-index="1">Study the influence of ground vehicles and <b style="color: rgb(149, 230, 255);">other large mammals</b> (e.g., humans, giraffes, rhinos) on detection accuracy.</li>
+							<li class="fragment fade-in-then-semi-out">Assess the <b style="color: rgb(149, 230, 255);">method's range limitations</b> to improve its design for larger or open environments.</li>
+						</ul></div>
+					</section>
+
+					<section>
+						<h2>References</h2>
+						<div style="width: 75%;margin: 0 auto;text-align: center">
+						<p style="font-size:xx-large;"> 
+							[1] Gustav Zetterqvist, Erik Wahledow, Philip Sjövik, Fredrik Gustafsson, and Gustaf Hendeby. "Elephant DOA Estimation using a Geophone Network". <em>In
+								2023 IEEE 26th International Conference on Information Fusion (FUSION)</em>. </p>
+						<p style="font-size:xx-large;"> 
+							[2] Gustav Zetterqvist, Fredrik Gustafsson, and Gustaf Hendeby. "Using Received	Power in Microphone Arrays to Estimate Direction of Arrival". <em>In ICASSP 2023 - 2023 IEEE International Conference on Acoustics, Speech	and Signal Processing (ICASSP)</em>. </p>
+						<p style="font-size:xx-large;"> 
+							[3] Gustav Zetterqvist, Fredrik Gustafsson, and Gustaf Hendeby. "Directional Sensitivity-Based DOA Estimation Using a Fourier Series Model" <em>IEEE Sensors Journal</em>, To be resubmitted. </p>
+						</div>
+					</section>
+				</section>
+
+				<section data-auto-animate  data-state="no-footer" data-hide-controls="true">			
+					<div>
+						<h1 style="position: relative; top: 230px;">Thank you!</h1>
+
+						<img src="assets/logos/elliit-logotyp-vit-gul.png" style="opacity: 90%; height: 100px; margin: 10px auto 4rem auto; background: transparent; position: absolute; top: 10px; right: 40px" class="demo-logo">
+				
+						<img src="assets/logos/LiU_primary_white.png" style="opacity: 90%;height: 150px; margin: 10px auto 4rem auto; background: transparent; position: absolute; left:30px; bottom: -590px;" class="demo-logo">
+				
+						<img src="assets/logos/WASP_logo_white.png" style="opacity: 90%;height: 150px; margin: 10px auto 4rem auto; background: transparent; position: absolute; right: 20px; bottom: -600px;" class="demo-logo">
+					</div>
+					<aside class="notes">
+						~ 44-46 min
+					</aside>
+				</section>
+
+
+				<!-- <section data-visibility="hidden">
+					<h2>Hidden Slides</h2>
+					<p>
+						This slide is visible in the source, but hidden when the presentation is viewed. You can show all hidden slides by setting the `showHiddenSlides` config option to `true`.
+					</p>
+				</section> -->
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: 1280,
+  				height: 720,
+				// Factor of the display size that should remain empty around
+  				// the content
+		  		margin: 0,
+				// defaultTiming: 120,
+				// totalTime: 2700, // 45 min
+				showHiddenSlides: false,
+				slideNumber: true,
+				controls: true,
+				controlsLayout: 'bottom-right',
+				controlsBackArrows: 'faded',
+
+				progress: true,
+				center: true,
+				hash: true,
+				animate: {
+	  				autoplay: true // default is false
+					},	
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				backgroundTransition: 'fade',
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.MathJax2,RevealLoadContent, RevealAnimate],
+				dependencies:
+				[
+					{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function() { footer_js.initialize(); } }
+				]
+			});
+
+			// Custom function to hide controls on slides with data-hide-controls="true"
+			Reveal.addEventListener('slidechanged', function(event) {
+            var currentSlide = event.currentSlide;
+            if (currentSlide.hasAttribute('data-hide-controls')) {
+                document.querySelector('.reveal').classList.add('no-controls');
+            } else {
+                document.querySelector('.reveal').classList.remove('no-controls');
+            }
+        	});
+
+		</script>
+
+		<style>
+			.reveal.no-controls .controls {
+				opacity: 0;
+			}
+		</style>
+	</body>
+</html>

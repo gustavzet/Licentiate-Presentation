@@ -1,0 +1,39 @@
+\begin{tikzpicture}
+    % Define the spacing and the number of elements
+    \def\DOA{20}
+    \coordinate (O) at (0,0);
+    \def\SensX{-2.4}
+    \def\SensY{0.6}
+
+    % Draw the coordinate axes
+    % \draw[thick,->] (0,0) -- (3,0) node[anchor=north east]{$x$};
+    % \draw[thick,->] (0,0) -- (0,2.5) node[anchor=north east]{$y$};
+    \draw[fill=textcolor,font=\color{textcolor}] (0,0) circle (2pt) node[anchor=north west] {Sensor 1};
+
+    % \tdplotdrawarc[->]{(O)}{1.5}{0}{\DOA}{anchor=north west, shift={(0,0.3)}}{$\psi$};
+
+    % Draw the sensor element
+    \draw[fill=textcolor,font=\color{textcolor}] (\SensX,\SensY) circle (2pt) node[anchor=south east] {Sensor 2};
+
+    % Draw source element towards DOA angle
+    % \draw[thick,->]  ({2.3*cos(\DOA)},{2.3*sin(\DOA)}) -- ({0.8*cos(\DOA)},{0.8*sin(\DOA)})  node[anchor=south west, shift={(0,0.4)}] {$\bm{v(\psi)}$};
+
+    % Draw loudspeaker symbol at the source
+    \pic[rotate=\DOA-90,font=\color{textcolor}] at ({2.6*cos(\DOA)},{2.6*sin(\DOA)}) {Speaker};
+    \node[anchor=center, shift={(0.2,0.7)},color=textcolor] at ({3.1*cos(\DOA)},{3.1*sin(\DOA)}) {Source};
+
+    % Find the intersection point
+    \path[name path=line1] ({0.8*cos(\DOA)},{0.8*sin(\DOA)}) -- ({-2.5*cos(\DOA)},{-2.5*sin(\DOA)});
+    \path[name path=line2] (\SensX,\SensY) -- ({\SensX+2.5*cos(\DOA-90)},{\SensY+2.5*sin(\DOA-90)});
+    \path[name intersections={of=line1 and line2, by=intersection}];
+
+    % Draw the lines using the intersection point
+    \draw[thick,dashed,opacity=0.5, color=textcolor]  (intersection) -- ({1.22*cos(\DOA)},{1.22*sin(\DOA)});
+    \draw[thick,dotted, color=textcolor] (intersection) --  (\SensX,\SensY);
+
+    % Add a 90-degree marker
+    \draw[thick, rotate=\DOA, color=textcolor] (intersection)++(0.2,0) -- ++(0,0.2) -- ++(-0.2,0);
+
+    % Draw the curly brace with label \tau
+    \draw[decorate,decoration={brace,amplitude=5pt},font=\color{textcolor},color=textcolor] (O) -- (intersection) node[midway,below=4pt,shift={(0.2,0)}] {$\tau$};
+\end{tikzpicture}

@@ -1,0 +1,95 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{pgfplots} % for tikz plot
+
+\usepackage{bm}
+\usetikzlibrary{positioning,calc,intersections,shapes, decorations.pathreplacing,matrix,fit,decorations.text}
+\usepackage{myTikz}
+\usepackage[paperwidth=500pt, paperheight=600pt]{geometry} % Adjust the page size if needed
+\geometry{textwidth=355.65944pt}
+
+\definecolor{textcolor}{rgb}{0.85, 0.85, 0.85} % Light gray color (equivalent to black!15!white) #D9D9D9
+\definecolor{background}{HTML}{191919}
+\colorlet{axiscolor}{textcolor!90!black}
+
+% \pagecolor{background}
+
+\begin{document}
+% \tikzset{every node/.style={text=textcolor,draw=textcolor}}  % Set text color globally
+
+\pgfplotsset{DarkMode/.style={
+    axis line style={color=axiscolor}, % Set axis lines to textcolor
+    xticklabel style={font=\color{textcolor}}, % Set x tick labels to textcolor
+    yticklabel style={font=\color{textcolor}}, % Set y tick labels to textcolor
+    % axis background/.style={fill=background},
+    legend style={fill=background, draw=axiscolor,font=\color{textcolor}\small,legend cell align=left, align=left},
+    title style={font=\bfseries\color{textcolor}},
+    ylabel style={font=\color{textcolor}},
+    xlabel style={font=\color{textcolor}}
+  }}
+\pgfplotsset{DirSensM/.style={
+  width=0.6\linewidth, % Width of the plot
+  height=0.6\linewidth, % Height of the plot
+  axis lines=none,
+  line width=1pt,
+  clip mode=individual,
+  xmin = -1.6,
+  xmax = 1.6,
+  ymin = -1.6,
+  ymax = 1.6
+}}
+\tdplotsetmaincoords{60}{110} % Set the viewing angle
+
+% \input{Figures/Intro_array_geometry.tex}
+% \input{Figures/Intro_concept.tex}
+% \input{Figures/Exp_setup_geophones.tex}
+% \input{Figures/Exp_setup_mic.tex}
+% \input{Figures/Est_array_geometry.tex}
+% \input{Figures/Est_ULA_array.tex}
+% \input{Figures/Est_UCA_array.tex}
+% \input{Figures/DOA_sim_sine.tex}
+% \input{Figures/DOA_sim_multisine.tex}
+% \input{Figures/Ele_detect_overview.tex}
+% \input{Figures/Ele_geophone_signal.tex}
+% \input{Figures/Ele_spectral_estimate.tex}
+% \input{Figures/Ele_30_spectral_estimate.tex}
+% \input{Figures/Ele_spectral_estimate_noise.tex}
+% \input{Figures/Ele_DOA_training.tex}
+% \input{Figures/Ele_KF_tracking.tex}
+% \input{Figures/Intro_concept.tex}
+% \input{Figures/Intro_concept_360.tex}
+% \input{Figures/RSS_viz_comb_abs.tex}
+\input{Figures/RSS_dir_sens_wn_357.tex}
+% \input{Figures/RSS_hist_err_wn.tex}
+% \input{Figures/RSS_CRLB_MSE_wn.tex}
+% \input{Figures/RSS_dir_sens_freq.tex}
+% \input{Figures/RSS_comp_methods.tex}
+% \input{Figures/RSS_CRLB_vs_MSE_wn_out.tex}
+% \input{Figures/RSS_CRLB_vs_MSE_sin_out.tex}
+% \input{Figures/Est_delay_and_sum.tex}
+% \input{sig_model_detection.tex}
+% \input{Figures/ds_uniform.tex}
+% \input{Figures/ds_1_mic.tex}
+% \input{Figures/ds_4_mic.tex}
+% \input{Figures/FreqWeightsWn.tex}
+% \input{Dirsens/dir_sens_1.tex}
+% \input{Dirsens/dir_sens_5.tex}
+% \input{Dirsens/dir_sens_10.tex}
+% \input{Dirsens/dir_sens_15.tex}
+% \input{Dirsens/dir_sens_20.tex}
+% \input{Dirsens/dir_sens_25.tex}
+% \input{Dirsens/dir_sens_30.tex}
+% \input{Dirsens/dir_sens_35.tex}
+% \input{Dirsens/dir_sens_40.tex}
+% \input{Figures/DirSensWnPolar7.tex}
+% \input{Figures/DirSensWnNoiseDistPolar.tex}
+% \input{Figures/DirSensWnNoiseDist.tex}
+% \input{Figures/DirSensWnNoiseDistdB.tex}
+% \input{Figures/RSS_violin_comp_anechoic_4x1.tex}
+% \input{Figures/RSS_violin_comp_outdoor_4x1.tex}
+
+
+
+
+\end{document}

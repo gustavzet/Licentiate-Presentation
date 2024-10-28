@@ -1,0 +1,49 @@
+\begin{tikzpicture}[
+    >=stealth,
+    block/.style={draw, rectangle, minimum height=0.5cm, minimum width=1.5cm},
+    sum/.style={draw, circle, inner sep=5pt},
+    dot/.style={circle, fill, inner sep=1pt},
+    every node/.style={text=textcolor}
+]
+
+% Microphones
+\node (m1) at (0,-2) {};
+\node[below=of m1] (m2) {};
+\node[below=2 of m2] (mM) {};
+
+% Delay blocks
+\node[block, right=4cm of m1,textcolor] (delay1) {$+\delta_1(\psi)$};
+\node[block, right=4cm of m2,textcolor] (delay2) {$+\delta_2(\psi)$};
+\node[block, right=4cm of mM,textcolor] (delay3) {$+\delta_M(\psi)$};
+
+% Summation
+\node[sum, right=of delay2,textcolor] (sum) {$\Sigma$};
+
+\node[block, right=of sum,textcolor] (scale) {$\frac{1}{M}$};
+
+% Output
+\node[right=of scale,textcolor] (output) {$y_{DS}[k,\psi]$};
+
+% Connections
+\draw[->, thick,textcolor] (m1) -- (delay1) node[midway, above] {$s[k-\delta_1(\psi)] + e_1[k]$};
+\draw[->, thick,textcolor] (m2) -- (delay2) node[midway, above] {$s[k-\delta_2(\psi)] + e_2[k]$};
+\draw[->, thick,textcolor] (mM) -- (delay3) node[midway, above] {$s[k-\delta_M(\psi)] + e_M[k]$};
+
+\draw[->, thick,textcolor] (delay1) -- (sum);
+\draw[->, thick,textcolor] (delay2) -- (sum);
+\draw[->, thick,textcolor] (delay3) -- (sum);
+
+% Vertical dots
+\node[below=of m2, dot, xshift=1cm,yshift=0.542cm,textcolor] (mm1) {};
+\node[below=of mm1, dot, yshift=0.7cm,textcolor] (mm2) {};
+\node[below=of mm2, dot, yshift=0.7cm,textcolor] (mm3) {};
+
+\node[below=of delay2, dot, xshift=0cm,yshift=0.7cm,textcolor] (delaym1) {};
+\node[below=of delaym1, dot, yshift=0.7cm,textcolor] (delaym2) {};
+\node[below=of delaym2, dot, yshift=0.7cm,textcolor] (delaym3) {};
+
+\draw[->, thick,textcolor] (sum) -- (scale);
+\draw[->, thick,textcolor] (scale) -- (output);
+
+
+\end{tikzpicture}

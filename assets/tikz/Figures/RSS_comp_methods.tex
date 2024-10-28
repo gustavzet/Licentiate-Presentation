@@ -1,0 +1,89 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
+%
+\pgfplotsset{myaxis_dir_sens_freq/.style={
+    DarkMode,
+width=0.8\linewidth, % Width of the plot
+height=0.38\linewidth, % Height of the plot
+axis lines=left,
+xmin=0.5,
+xmax=8.6,
+ymin=0.1,
+ymax=20,
+xmajorgrids,
+ymajorgrids,
+line width=0.5pt,
+axis line style={line width=1.1pt},
+xtick={-180,-90,0,90,180},
+ytick={-50,-40,-30},
+xticklabel style={rotate=45},
+% title style={font=\bfseries},
+legend style={at={(0.03,1.02)},anchor=north west, legend cell align=left, align=left, line width=0.9, fill=background, draw=textcolor,font=\color{textcolor}\small},
+xmajorgrids,
+ymajorgrids,
+yminorgrids,
+yminorticks=true,
+log origin=infty,
+bar width=5,
+legend columns=-1,
+% legend style={legend cell align=left, align=left, draw=white!15!black , nodes={scale=1, transform shape}}
+}}
+
+\begin{tikzpicture}
+
+\begin{axis}[%
+myaxis_dir_sens_freq,
+bar shift auto,
+xtick={1,2,3,4,5,6,7,8},
+xticklabels={{Noise},{Drone},{Elephant},{Siren},{Scream},{Noise low},{Noise high},{Shot}},
+% ylabel style={font=\color{white!15!black}},
+ylabel={RMSE [$^\circ$]},
+title={RMSE of estimation error for the different methods},
+ymode=log,
+minor grid style={dashed}
+]
+\addplot[ybar, fill=mycolor1, draw=textcolor, area legend] table[row sep=crcr] {%
+1	0.716472842006826\\
+2	0.779422863405993\\
+3	2.29646467423299\\
+4	0.999166319154789\\
+5	5.50715443763837\\
+6	0.744703520424968\\
+7	0.756086414814252\\
+8	1.20830459735945\\
+};
+\addlegendentry{Comb, abs \hspace{2pt}}
+
+\addplot[ybar, fill=mycolor2, draw=textcolor, area legend] table[row sep=crcr] {%
+1	0.347011046894288\\
+2	0.517204021639426\\
+3	2.3508863576674\\
+4	1.11317863196644\\
+5	6.72442686529244\\
+6	0.334788490443337\\
+7	0.355316760088796\\
+8	6.63764516476539\\
+};
+\addlegendentry{Sep, abs \hspace{2pt}}
+
+\addplot[ybar, fill=mycolor3, draw=textcolor, area legend] table[row sep=crcr] {%
+1	0.286501890627849\\
+2	0.234520787991169\\
+3	0.546961302714064\\
+4	0.601387285088952\\
+5	0.807258735887488\\
+6	0.237170824512629\\
+7	0.243241991988773\\
+8	0.807000619578448\\
+};
+\addlegendentry{Sep, dB}
+\end{axis}
+
+\end{tikzpicture}%

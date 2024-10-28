@@ -1,0 +1,45 @@
+% \begin{tikzpicture}[node distance=3.5cm]
+%     % Noder
+%     \node (meas) [rectangle,text width=3cm, align=center,textcolor] {Measurement segment};
+%     \node (filter) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.7cm, align=center,right of=meas, minimum width=1cm, minimum height=0.5cm,textcolor] {Band-pass filter};
+%     \node (window) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.7cm, align=center, right of=filter, minimum width=1cm, minimum height=0.5cm,textcolor] {Window};
+%     \node (fft) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.7cm, align=center, right of=window, minimum width=1cm, minimum height=0.5cm,textcolor] {$|$FFT$|^2$};
+%     % \node (periodogram) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.7cm, align=center, right of=fft, minimum width=1cm, minimum height=0.5cm] {Periodogram};
+%     \node (normalize) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.7cm, align=center, right of=fft, minimum width=1cm, minimum height=0.5cm,textcolor] {Normalize};
+%     \node (sum) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.7cm, align=center, right of=normalize, minimum width=1cm, minimum height=0.5cm,textcolor] {Summation};
+%     \node (detect) [rectangle, draw, rounded corners,fill=green, fill opacity=0.4, text opacity=1,text width=2.7cm, align=center, right of=sum,yshift=0.6cm,xshift=0cm, minimum width=1cm, minimum height=0.5cm,font=\color{white},draw=textcolor] {Detect};
+%     \node (reject) [rectangle, draw, rounded corners,fill=red, fill opacity=0.4, text opacity=1,text width=2.7cm, align=center, right of=sum,yshift=-0.6cm,xshift=0cm, minimum width=1cm, minimum height=0.5cm,font=\color{white},draw=textcolor] {Reject};
+%     % Pilarna
+%     \draw [->,textcolor] (meas) -- (filter);
+%     \draw [->,textcolor] (filter) -- (window);
+%     \draw [->,textcolor] (window) -- (fft);
+%     \draw [->,textcolor] (fft) -- (normalize);
+%     \draw [->,textcolor] (normalize) -- (sum);
+%     \draw [->,textcolor] (sum) -- (detect);
+%     \draw [->,textcolor] (sum) -- (reject);
+
+%     \node[rectangle, align=center,left of=detect,yshift=0cm,xshift=1.5cm,textcolor] {$>T$};
+%     \node[rectangle, align=center,left of=reject,yshift=0cm,xshift=1.5cm,textcolor] {$\le T$};
+%     \end{tikzpicture}
+\begin{tikzpicture}[node distance=3.5cm]
+    % Noder
+    \node (meas) [rectangle,text width=2.3cm, align=center,textcolor] {Measurement segment};
+    \node (filter) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.3cm, align=center,right of=meas, minimum width=1cm, minimum height=0.5cm,textcolor] {Band-pass filter};
+    \node (window) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.3cm, align=center, right of=filter, minimum width=1cm, minimum height=0.5cm,textcolor] {Window};
+    \node (fft) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.3cm, align=center, below of=window, minimum width=1cm, minimum height=0.5cm,yshift=2cm,textcolor] {$|$FFT$|^2$};
+    \node (normalize) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.3cm, align=center, left of=fft, minimum width=1cm, minimum height=0.5cm,textcolor] {Normalize};
+    \node (sum) [rectangle, draw, rounded corners,fill=gray, fill opacity=0.4, text opacity=1,text width=2.3cm, align=center, left of=normalize, minimum width=1cm, minimum height=0.5cm,textcolor] {Summation};
+    \node (detect) [rectangle, draw, rounded corners,fill=green, fill opacity=0.4, text opacity=1,text width=2.3cm, align=center, below of=sum,yshift=0cm,xshift=1.5cm, minimum width=1cm, minimum height=0.5cm,yshift=2cm,font=\color{white},draw=textcolor] {Detect};
+    \node (reject) [rectangle, draw, rounded corners,fill=red, fill opacity=0.4, text opacity=1,text width=2.3cm, align=center, below of=sum,yshift=0cm,xshift=-1.5cm, minimum width=1cm, minimum height=0.5cm,yshift=2cm,font=\color{white},draw=textcolor] {Reject};
+    % Pilarna
+    \draw [->,textcolor] (meas) -- (filter);
+    \draw [->,textcolor] (filter) -- (window);
+    \draw [->,textcolor] (window) -- (fft);
+    \draw [->,textcolor] (fft) -- (normalize);
+    \draw [->,textcolor] (normalize) -- (sum);
+    \draw [->,textcolor] (sum) -- (detect);
+    \draw [->,textcolor] (sum) -- (reject);
+
+    \node[rectangle, align=center,above of=detect,yshift=-2.7cm,xshift=0cm,textcolor] {$>T$};
+    \node[rectangle, align=center,above of=reject,yshift=-2.7cm,xshift=-0cm,textcolor] {$\le T$};
+\end{tikzpicture}

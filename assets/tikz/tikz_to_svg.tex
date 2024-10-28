@@ -1,0 +1,42 @@
+\documentclass[dvisvgm]{minimal}
+\usepackage{tikz}
+\usepackage{pgfplots} % for tikz plot
+\usetikzlibrary{positioning,fit,calc,shadows}
+\usepackage{assets/tikz/myTikz}
+% \pgfrealjobname{dummy}
+
+\begin{document}
+
+\input{assets/tikz/Ele_KF_tracking.tex}
+% \input{sig_model_detection.tikz}
+% \input{detection_overview.tikz}
+% \begin{tikzpicture}[thick, scale=0.7]
+%     \node at (2,0) (LowerRight) {};
+%     \node at (-2,0) (LowerLeft) {};
+%     \node at (0,3.464) (Top) {};
+%     \node at (0,1.1547) (Center) {};
+%     \draw[orange, dashed,ultra thick] (LowerRight) -- (LowerLeft);
+%     \draw[orange, dashed,ultra thick] (LowerRight) -- (Top);
+%     \draw[orange, dashed,ultra  thick] (LowerLeft) -- (Top);
+%     \filldraw[black] (LowerLeft) circle (10pt) {};
+%     \node[white] at (LowerLeft) {$1$};
+%     \filldraw[black] (LowerRight) circle (10pt)  {};
+%     \node[white] at (LowerRight) {$2$};
+%     \filldraw[black] (Top) circle (10pt)  {};
+%     \node[white] at (Top) {$3$};
+
+%     \draw[black,ultra thick, <->,yshift=0.65*0.5cm,,xshift=-0.65*0.866cm] (-2,0) -- (0,3.464) node[midway,above,black,rotate=60] {$4$\,m};
+
+%     \filldraw[gray] (Center) circle (5pt) {};
+%     \draw[gray,ultra thick] (Center) -- (2,1.1547);
+%     \draw[gray,dotted,ultra thick] (Center) -- (2,1.1547+2);
+%     \draw[->, gray,ultra thick] (1.5,1.1547) arc
+%         [
+%             start angle=0,
+%             end angle= 45,
+%             x radius= 1.5cm,
+%             y radius =1.5cm
+%         ] node[midway,right,gray] {$\phi(t)$};
+% \end{tikzpicture}
+
+\end{document}

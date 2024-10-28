@@ -1,0 +1,51 @@
+\begin{tikzpicture}
+    % Define the spacing and the number of elements
+    \def\DOA{30}
+    \coordinate (O) at (0,0);
+    \def\SensOX{-2}
+    \def\SensOY{0.5}
+    \def\SensTX{1.8}
+    \def\SensTY{-0.5}
+
+    % Draw the coordinate axes
+    \draw[thick,->,textcolor] (0,0) -- (3.3,0) node[anchor=north east]{$x$};
+    \draw[thick,->,textcolor] (0,0) -- (0,2.5) node[anchor=north east]{$y$};
+
+    \tdplotdrawarc[->,textcolor]{(O)}{2}{0}{\DOA}{anchor=north west, shift={(0,0.3)}}{$\psi$};
+
+    % Draw the sensor element
+    \draw[fill=textcolor] (\SensOX,\SensOY) circle (2pt) node[anchor=south east,textcolor] {Sensor 1};
+
+    \draw[fill=textcolor] (\SensTX,\SensTY) circle (2pt) node[anchor=north west,textcolor] {Sensor 2};
+
+    % Draw source element towards DOA angle
+    \draw[thick,->,textcolor]  ({2.7*cos(\DOA)},{2.7*sin(\DOA)}) -- ({1.6*cos(\DOA)},{1.6*sin(\DOA)})  node[anchor=south west, shift={(-0.1,0.4)}] {$\bm{v(\psi)}$};
+
+    % Draw loudspeaker symbol at the source
+    \pic[rotate=\DOA-90,textcolor] at ({4*cos(\DOA)},{4*sin(\DOA)}) {Speaker};
+    \node[anchor=center, shift={(0.8,0.2)},textcolor] at ({4.4*cos(\DOA)},{4.4*sin(\DOA)}) {Source};
+
+    % Find the intersection point
+    \path[name path=line1] ({0.8*cos(\DOA)},{0.8*sin(\DOA)}) -- ({-2.5*cos(\DOA)},{-2.5*sin(\DOA)});
+    \path[name path=line2] (\SensOX,\SensOY) -- ({\SensOX+2.5*cos(\DOA-90)},{\SensOY+2.5*sin(\DOA-90)});
+    \path[name intersections={of=line1 and line2, by=intersection1}];
+
+    \path[name path=line12] ({1.8*cos(\DOA)},{1.8*sin(\DOA)}) -- ({-2.5*cos(\DOA)},{-2.5*sin(\DOA)});
+    \path[name path=line22] (\SensTX,\SensTY) -- ({\SensTX-2.5*cos(\DOA-90)},{\SensTY-2.5*sin(\DOA-90)});
+    \path[name intersections={of=line12 and line22, by=intersection2}];
+
+    % Draw the lines using the intersection point
+    \draw[thick,dotted, color=textcolor] ({1.6*cos(\DOA)},{1.6*sin(\DOA)}) -- (intersection1);
+    \draw[thick,dashed, color=textcolor] (intersection1) -- (\SensOX,\SensOY);
+    \draw[thick,dashed, color=textcolor] (intersection2) -- (\SensTX,\SensTY);
+
+
+    % Add a 90-degree marker
+    % \draw[thick, rotate=\DOA] (intersection1)++(0.2,0) -- ++(0,0.2) -- ++(-0.2,0);
+    % \draw[thick, rotate=\DOA] (intersection2)++(+0.2,0) -- ++(0,-0.2) -- ++(-0.2,0);
+
+    % Draw the curly brace with label \tau
+    \draw[decorate,decoration={brace,amplitude=5pt},textcolor] (O) -- (intersection1) node[midway,below=4pt,shift={(0.2,0)}] {$\tau_1$};
+
+    \draw[decorate,decoration={brace,amplitude=5pt},textcolor] (O) -- (intersection2) node[midway,above=4pt,shift={(-0.2,0)}] {$-\tau_2$};
+\end{tikzpicture}

@@ -1,0 +1,32 @@
+\begin{tikzpicture}[tdplot_main_coords]
+    % Define the radius and the number of elements
+    \def\radius{1.5}
+    \def\DOA{65}
+    \def\numElements{8}
+    \coordinate (O) at (0,0,0);
+
+    % Draw the coordinate axes
+    \draw[thick,->,textcolor] (0,0,0) -- (3,0,0) node[anchor=north east]{$x$};
+    \draw[thick,->,textcolor] (0,0,0) -- (0,3,0) node[anchor=north west]{$y$};
+    \draw[thick,->,textcolor] (0,0,0) -- (0,0,3) node[anchor=south]{$z$};
+
+    % Draw the dotted circle in the xy-plane (z=0)
+    \tdplotdrawarc[dotted,textcolor]{(O)}{\radius}{0}{360}{anchor=north}{}
+
+    \draw[thick,dotted,textcolor] (O) -- ({2.5*cos(\DOA)},{2.5*sin(\DOA)},0);
+    \tdplotdrawarc[->,textcolor]{(O)}{2.5}{0}{\DOA}{anchor=north}{$\psi$}
+
+    % Draw the elements in the xy-plane
+    \foreach \i in {1,...,\numElements} {
+      \draw ({360/\numElements * (\i-1)}:\radius) node[circle,fill,inner sep=2pt,textcolor] (node\i) {};
+      \ifnum\i=1
+          \node[below, xshift=.5, yshift=-2,textcolor] at (node\i) {$0$};
+      \fi
+      \ifnum\i=2
+          \node[below, xshift=.5, yshift=-1,textcolor] at (node\i) {$1$};
+      \fi
+      \ifnum\i=\numElements
+          \node[above, xshift=10, yshift=-2,textcolor] at (node\i)[anchor=north east] {$M-1$};
+      \fi
+      }
+\end{tikzpicture}
